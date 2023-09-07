@@ -1,103 +1,61 @@
-# Spring Boot Microservices With IntelliJ IDEA
+# Spring Boot Microservices With IntelliJ IDEA - Workout Builder
 
 ## Introduction
 
-My Plant Diary allows homeowners to maintain records on plants in their yard.  They can upload photos and add notes to a plant at any time.  Plant data, including sustainability and edibility, are sourced from PlantPlaces.com master data.
-
-Users can generate a report to show several attributes of their yard: sustainability, edibility, native, etc.  This report can be used to help sell the positive attributes of the house.
-
-Users can interact with MyPlantDiary using either a set of RESTful service endpoints, or a simple UI, or both.
+My Workout Builder allows individuals to create sets of exercises into a custom workout plan based on their preferences and allotted time. Users can then log their workout and keep a history of how much they've exercised each day. Trainers are able to perform basic CRUD operations from a manage exercises panel.
 
 ## Storyboard
 
-[Storyboard in Invision](https://projects.invisionapp.com/prototype/Plant-Diary-ck0bict0n005bqh01aaeu8tuu)
+[Figma story boarding](https://www.figma.com/file/0bNbilsSdP1WYJjVXg4DsK/Bootstrap-5-Design-System---UI-Kit-(Community)?type=design&node-id=1%3A4820&mode=design&t=YTEGv7W80dwTvb6q-1)
 
 ## Requirements
 
-1. As a homeowner, I want to be able to catalog my specimens, so that I will remember what I planted.
+1. As an athlete, I can log my workouts
+2. As an athlete, I can view my previous workouts
+3. As an athlete, I can generate a custom workout
+4. As an athlete, I can add an exercise
 
-### Example 
+## Examples
 
-**Given**:  A feed of plant data are available
+**Given**: User is logged in and a feed of exercises (workout) is available
 
-**When**: The user/service selects plant Eastern Redbud
+**When**: The user selects the date 09/05/23
 
-**When**: The user/service adds latitude 39.74 to an Eastern Redbud specimen
+**Then**: The user can view the workout that they did for that date
 
-**Then**: The user’s/service’s Eastern Redbud will be saved with 39.74 latitude.
+---
 
-### Example 
+**Given**: User is logged in and selects a date that has no workouts for it
 
-**Given**: Specimen data are available
+**Then**: Fallback text states that there was no workout on that date
 
-**When**: The user/service searches for “kajsd;luaopuidfjo;aj;sd”
+---
 
-**Then**: My Plant Diary will not return any results, and the user will not be able to save the specimen.
+**Given**: A feed of exercises (workout) is available
 
-### Example 
+**When**: User selects the type of exercise, Cardio, and the amount of time 45 minutes
 
-**Given**: Specimen data are available, and specimen 83 is Eastern Redbud.
+**Then**: The workout generated with type cardio and time of 45 minutes
 
-**When**: The user/service searches for the specimen with ID “83”
+---
 
-**Then**: My Plant Diary will return exactly one specimen record for "Eastern Redbud".
+**Given**: The user visits a login screen
 
-### Example 
+**When**: The users enters a username "EXAMPLE" and password "PASSWORD123"
 
-**Given**: Specimen data are available
+**Then**: The user gets logged in
 
-**When**: The user/service posts a new Specimen object with valid attributes "latitude=39.74, longitude=-84.51"
+---
 
-**Then**: MyPlantDiary will create a new specimen for this record, and will return this new specimen object.
+**Given**: The user is logged in and on the home page
 
-2.	As a homeowner, I want to be able to upload photos of my plant at any time.
+**When**: The user has the new exercise description filled out, and an exercise type selected. They press the create exercise button.
 
-### Example 
-
-**Given**: The user is logged in and has selected a previously-saved Eastern Redbud specimen
-
-**When**: The user uploads a valid 640*480 photo of an Eastern Redbud Flower
-
-**Then**: The 640*480  photo of an Eastern Redbud flower will be saved to the specimen profile, and can be viewed later.
-
-### Example 
-
-**Given**: The user is logged in and has selected a previously-saved Eastern Redbud specimen
-
-**When**: The user uploads a 100GB photo
-
-**Then**: The photo will be rejected as too large.
-
-### Example 
-
-**Given**: The user is logged in and has selected a previously-saved Eastern Redbud specimen
-
-**When**: The user uploads a 1600*1200 photo
-
-**Then**: The photo will be resized automatically to 640*480
-
-**Then**: The 640*480 photo will be shown to the user.
-
-3)	As a homeowner, I want to generate a report of the sustainability of my yard.
-### Example 
-
-**Given**: The user has a valid account and specimens associated to that account.
-
-**When**: The user runs a report.
-
-**Then**: The user will see a report of plants, dates, native, edible, and sustainability rating.
-
-### Example 
-
-**Given**: The user has a valid account and no specimens associated to that account.
-
-**When**: The user runs a report.
-
-**Then**: The user will see an error, indicating no data available for report.
+**Then**: A new exercise is added and can be used when generating a workout
 
 ## Class Diagram
 
-![My Plant Diary Class Diagram](https://github.com/discospiff/SpringBootMicroservicesWithIntelliJIDEA/blob/master/PlantDiaryClassDiagram.drawio.png)
+[Our Diagram (LucidCharts)](https://lucid.app/lucidchart/f9698650-ee07-4a2e-b23d-bee182d04a9c/edit?viewport_loc=-866%2C786%2C3238%2C1602%2C0_0&invitationId=inv_fa7f720f-869a-441c-b89c-e92efc2ee4ea)
 
 ### Class Diagram Description 
 
