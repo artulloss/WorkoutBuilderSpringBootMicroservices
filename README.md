@@ -10,12 +10,35 @@ My Workout Builder allows individuals to create sets of exercises into a custom 
 
 ## Requirements
 
-1. As an athlete, I can log my workouts
-2. As an athlete, I can view my previous workouts
-3. As an athlete, I can generate a custom workout
-4. As an athlete, I can add an exercise
+### 1. As an athlete, I can log my workouts
 
-## Examples
+#### Examples
+
+**Given**: The user is logged in and has worked out
+
+**When**: The users enters their workout with the exercises "Indoor Running," and "Dumbbell Curls" with a duration of 45 minutes
+
+**Then**: The workout is saved with the exercised "Indoor Running," and Dumbbell Curls" with a duration of 45 minutes and the current date
+
+---
+
+**Given**: The user is logged in and has worked out
+
+**When**: The users enters their workout with the exercises "Indoor Running," and "Dumbbell Curls" but does not enter a duration
+
+**Then**: The workout is not saved and an error is given - "Must select workout duration"
+
+---
+
+**Given**: The user is logged in and has an incomplete workout planned
+
+**When**: The user clicks a check-box on an incomplete workout to mark the workout as completed
+
+**Then**: The workout will be logged and can be viewed as a completed workout
+
+### 2. As an athlete, I can view my previous workouts
+
+#### Examples
 
 **Given**: User is logged in and a feed of exercises (workout) is available
 
@@ -25,33 +48,48 @@ My Workout Builder allows individuals to create sets of exercises into a custom 
 
 ---
 
-**Given**: User is logged in and selects a date that has no workouts for it
+**Given**: User is logged in and on home page
+
+**When**: The user selects a date that has no workouts for it
 
 **Then**: Fallback text states that there was no workout on that date
 
+
+### 3. As an athlete, I can generate a custom workout plan 
+
+#### Examples
+
+**Given**: User is logged in and a feed of exercises is available
+
+**When**: User selects the exercises "Squats" and "Push-ups", a duration of 30 minutes, and sets the planned date to 9/10/23
+
+**Then**: The workout plan is created for the date 9/10/23, to do squats and push-ups for 30 minutes
+
 ---
 
-**Given**: A feed of exercises (workout) is available
+**Given**: User is logged in and a feed of exercises is available
 
-**When**: User selects the type of exercise, Cardio, and the amount of time 45 minutes
+**When**: User selects the exercises "Squats" and "Push-ups", a duration of 30 minutes, and sets the planned date to 9/10/22 (in the past)
 
-**Then**: The workout generated with type cardio and time of 45 minutes
+**Then**: The workout plan is not created and displays an error - "Please select a future date"
 
----
+### 4. As an athlete, I can add an exercise
 
-**Given**: The user visits a login screen
+#### Examples
 
-**When**: The users enters a username "EXAMPLE" and password "PASSWORD123"
+**Given**: The user is logged in and on the home page
 
-**Then**: The user gets logged in
+**When**: The user has the new exercise name and description filled out, and an exercise type selected. They press the create exercise button.
+
+**Then**: A new exercise is added and can be used when logging a workout
 
 ---
 
 **Given**: The user is logged in and on the home page
 
-**When**: The user has the new exercise description filled out, and an exercise type selected. They press the create exercise button.
+**When**: The user has the new exercise name but no description filled out, and an exercise type selected. They press the create exercise button.
 
-**Then**: A new exercise is added and can be used when generating a workout
+**Then**: The exercise is not created it an error is thrown - "Please add a description"
 
 ## Class Diagram
 
@@ -63,24 +101,49 @@ My Workout Builder allows individuals to create sets of exercises into a custom 
 
 This is what we plan to export to another app.
 
+```
+{
+    "type": "object",
+    "title": "Workout",
+    "properties": {
+        "date": {
+            "type": "string",
+            "format": "date-time",
+        },
+        "id": {
+            "type": "integer",
+        },
+        "workout_type": {
+            "type": "string",
+        },
+        "exercises": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    // todo: Define properties for the Exercise object here 
+                }
+            },
+        },
+        "user": {
+            "type": "object",
+            "properties": {
+                // todo: Define properties for the User object here 
+            },
+        }
+    },
+    "required": ["date", "id", "workout_type", "exercises", "user"]
+}
 
-> {
->  "type" : "object",
->  "properties" : {
->    "name" : {
->      "type" : "string"
->    },
->    "age" : {
->      "type" : "integer"
->    }
->  }
-> }
+```
 
-## Team Memebers and Roles
+## Team Members and Roles
 
-UI Specialist: Brandan Jones
-Business Logic/Persitence: Brandan Jones
-DevOps/Product Owner/Scrum Master/GitHub Admin: Brandan Jones
+**UI Specialist**: Alex Balogh, Steele Shreve
+
+**Business Logic/Persistence**: Charles Hayes, Adam Tulloss
+
+**DevOps/Product Owner/Scrum Master/GitHub Admin**: Adam Tulloss
 
 ## Milestones
 
@@ -88,7 +151,7 @@ DevOps/Product Owner/Scrum Master/GitHub Admin: Brandan Jones
 
 ## Standup
 
-[We meet 7:00 PM Eastern on Sunday on Teams](https://teams.microsoft.com/l/meetup-join/19%3af8fd74991d314a0987e34b7c91ed88be%40thread.tacv2/1598225206706?context=%7b%22Tid%22%3a%22f5222e6c-5fc6-48eb-8f03-73db18203b63%22%2c%22Oid%22%3a%225c29be2c-6de4-49ad-a444-dfb003838da6%22%7d)
+[We meet 8:00 PM Eastern on Tuesday on Teams](https://teams.microsoft.com/l/meetup-join/19%3ameeting_NGU0OGU4MWMtMDU4MC00MTU1LWI0YTItZmZjZWNmY2I3MjE5%40thread.v2/0?context=%7b%22Tid%22%3a%22f5222e6c-5fc6-48eb-8f03-73db18203b63%22%2c%22Oid%22%3a%2238d37589-3436-44b5-a523-52f509e18081%22%7d)
 
 
 
