@@ -97,6 +97,8 @@ My Workout Builder allows individuals to create sets of exercises into a custom 
 
 ### Class Diagram Description 
 
+The Exercise class pulls in information about a specific exercise. This class calls for an ID that it will set itself, A name that you will provide, A description, A workout type (Chest, Arm, Abs, Cardio, etc.), and a duration for the exercise. The Workout class will gather information from the exercise class and create a workout plan. The User class brings in information on who uses the software. It will connect with the exercise so you can know who created the exercises. The Exercise Controller class will gather the Exercises and ID them. The Workout Controller is what builds the workouts. It will pull from the Exercises and create a workout based on the type of workout you want to do. 
+
 ## JSON Schema
 
 This is what we plan to export to another app.
