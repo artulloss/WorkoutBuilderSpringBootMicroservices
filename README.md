@@ -6,7 +6,7 @@ My Workout Builder allows individuals to create sets of exercises into a custom 
 
 ## Storyboard
 
-[Figma story boarding](https://www.figma.com/file/0bNbilsSdP1WYJjVXg4DsK/Bootstrap-5-Design-System---UI-Kit-(Community)?type=design&node-id=1%3A4820&mode=design&t=YTEGv7W80dwTvb6q-1)
+[Figma story boarding](https://www.figma.com/file/Go9DYpQzM3YUQwRWkNXNnN/Workout-Builder-Project?type=design&node-id=0%3A1&mode=design&t=VB0P9OIyYVFyBNt0-1)
 
 ## Requirements
 
