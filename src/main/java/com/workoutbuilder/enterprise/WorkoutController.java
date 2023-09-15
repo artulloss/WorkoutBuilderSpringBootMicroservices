@@ -13,4 +13,13 @@ public class WorkoutController {
     public String index() {
         return "index";
     }
+
+    /**
+     * Handle the user specific dashboard endpoint when a user signs in or signs up.
+     * Endpoint will become (/uid/dashboard) when we apply authentication.
+     */
+    @RequestMapping("autheduser")
+    public String autheduser() {
+        return "autheduser";
+    }
 }
