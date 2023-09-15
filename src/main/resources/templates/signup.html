@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-US" class="h-full bg-white">
+<head>
+    <meta charset="UTF-8">
+    <title>Workout Builder — Sign Up</title>
+    <link rel="stylesheet" th:href="@{/css/application.css}">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-red': '#8B0000',
+                        'lighter-red': '#A10A0A',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-full">
+    <div class="flex min-h-full">
+        <div class="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+            <div class="mx-auto w-full max-w-sm lg:w-96">
+                <div>
+                    <img class="h-10 w-auto" th:src="@{/images/logo.svg}" alt="Workout Builder">
+                    <h2 class="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">Create Workout Builder Account</h2>
+                </div>
+
+                <div class="mt-10">
+                    <div>
+                        <form action="#" method="POST" class="space-y-6">
+                            <div>
+                                <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                                <div class="mt-2">
+                                    <input id="firstname" name="firstname" type="text" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                                <div class="mt-2">
+                                    <input id="lastname" name="lastname" type="text" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                                <div class="mt-2">
+                                    <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                                <div class="mt-2">
+                                    <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div>
+                                <button type="submit" class="flex w-full justify-center rounded-md bg-deep-red px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lighter-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lighter-red">Sign Up</button>
+                            </div>
+                        </form>
+                        <div class="mt-10 text-center text-sm text-gray-500 flex flex-col">
+                            <span>Already a member? <a th:href="@{/login}" class="font-semibold leading-6 text-deep-red hover:text-lighter-red">Log In &rarr;</a></span>
+                            <a class="mt-8 text-deep-red hover:text-lighter-red" th:href="@{/}">Return to home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="relative hidden w-0 flex-1 lg:block">
+            <img class="absolute inset-0 h-full w-full object-cover" th:src="@{/images/gym-signup.jpg}" alt="Gym">
+        </div>
+    </div>
+</body>
+</html>
