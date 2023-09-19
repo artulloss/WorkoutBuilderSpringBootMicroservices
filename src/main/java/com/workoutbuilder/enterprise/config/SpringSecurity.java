@@ -1,7 +1,6 @@
 package com.workoutbuilder.enterprise.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -75,9 +74,7 @@ public class SpringSecurity {
                         e -> e
                                 .accessDeniedPage("/error")
                                 .defaultAuthenticationEntryPointFor(
-                                        (request, response, authException) -> {
-                                            response.sendRedirect("/error");
-                                        },
+                                        (request, response, authException) -> response.sendRedirect("/error"),
                                         new AntPathRequestMatcher("/**")
                                 )
                 );

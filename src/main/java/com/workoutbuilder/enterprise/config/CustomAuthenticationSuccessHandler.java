@@ -30,7 +30,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
      * If the user exists, they are redirected to their specific dashboard URL.
      * Otherwise, the superclass's success URL is used.
      *
-     * @param request
+     * @param request        the HTTP request.
      * @param response       the HTTP response.
      * @param authentication the current authentication object.
      * @throws IOException      if an IO error occurs.
