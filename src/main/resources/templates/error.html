@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-white" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Something went wrong!</title>
+    <link rel="stylesheet" th:href="@{/css/application.css}">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-red': '#8B0000',
+                        'lighter-red': '#A10A0A',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-full">
+<div class="flex min-h-full flex-col bg-white pb-12 pt-16">
+    <main class="mx-auto flex w-full max-w-7xl flex-grow flex-col justify-center px-6 lg:px-8">
+        <div class="flex flex-shrink-0 justify-center">
+            <a href="#" class="inline-flex">
+                <span class="sr-only">Workout Builder</span>
+                <img class="h-12 w-auto" th:src="@{/images/logo.svg}" alt="Workout Builder logo">
+            </a>
+        </div>
+        <div class="py-16">
+            <div class="text-center">
+                <h1 class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Something went wrong!</h1>
+                <p class="mt-2 text-base text-gray-500">Sorry, we can't find the page you’re looking for.</p>
+                <div class="mt-6">
+                    <div sec:authorize="isAnonymous()" class="flex flex-col gap-4">
+                        <a th:href="@{/signup}" class="text-base font-medium text-deep-red hover:text-lighter-red">
+                            Sign Up
+                            <span aria-hidden="true"> &rarr;</span>
+                        </a>
+                        <a th:href="@{/login}" class="text-base font-medium text-deep-red hover:text-lighter-red">
+                            Login
+                            <span aria-hidden="true"> &rarr;</span>
+                        </a>
+                        <a th:href="@{/}" class="text-base font-medium text-deep-red hover:text-lighter-red">
+                            Return home
+                            <span aria-hidden="true"> &rarr;</span>
+                        </a>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <div th:if="${user != null}">
+                            <a th:href="@{'/' + ${user.getId()} + '/dashboard'}" class="text-base font-medium text-deep-red hover:text-lighter-red">
+                                Return to dashboard
+                                <span aria-hidden="true"> &rarr;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
