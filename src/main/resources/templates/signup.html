@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US" class="h-full bg-white">
+<html lang="en-US" class="h-full bg-white" xmlns:x-transition="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Workout Builder — Sign Up</title>
@@ -30,29 +30,45 @@
 
             <div class="mt-10">
                 <div>
-                    <form action="#" method="POST" class="space-y-6">
+                    <form novalidate th:action="@{signup}" th:object="${user}" method="POST" class="space-y-6">
                         <div>
                             <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">First name<span class="text-deep-red"><sup>*</sup></span></label>
                             <div class="mt-2">
-                                <input id="firstname" name="firstname" type="text" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6" placeholder="John">
+                                <input th:field="*{firstName}" id="firstname" name="firstname" type="text" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6">
+                                <ul th:if="${#fields.hasErrors('firstName')}">
+                                    <li th:each="error : ${#fields.errors('firstName')}"
+                                        th:text="${error}" class="text-lighter-red text-xs"></li>
+                                </ul>
                             </div>
                         </div>
                         <div>
                             <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">Last name<span class="text-deep-red"><sup>*</sup></span></label>
                             <div class="mt-2">
-                                <input id="lastname" name="lastname" type="text" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6" placeholder="Doe">
+                                <input th:field="*{lastName}" id="lastname" name="lastname" type="text" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6">
+                                <ul th:if="${#fields.hasErrors('lastName')}">
+                                    <li th:each="error : ${#fields.errors('lastName')}"
+                                        th:text="${error}" class="text-lighter-red text-xs"></li>
+                                </ul>
                             </div>
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address<span class="text-deep-red"><sup>*</sup></span></label>
                             <div class="mt-2">
-                                <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6" placeholder="johndoe@example.com">
+                                <input th:field="*{email}" id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6">
+                                <ul th:if="${#fields.hasErrors('email')}">
+                                    <li th:each="error : ${#fields.errors('email')}"
+                                        th:text="${error}" class="text-lighter-red text-xs"></li>
+                                </ul>
                             </div>
                         </div>
                         <div>
                             <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password<span class="text-deep-red"><sup>*</sup></span></label>
                             <div class="mt-2">
-                                <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6">
+                                <input th:field="*{password}" id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-deep-red sm:text-sm sm:leading-6">
+                                <ul th:if="${#fields.hasErrors('password')}">
+                                    <li th:each="error : ${#fields.errors('password')}"
+                                        th:text="${error}" class="text-lighter-red text-xs"></li>
+                                </ul>
                             </div>
                         </div>
                         <div>
@@ -63,10 +79,10 @@
                         <span>Already a member? <a th:href="@{/login}" class="font-semibold leading-6 text-deep-red hover:text-lighter-red">Log In &rarr;</a></span>
                         <a class="mt-8 text-deep-red hover:text-lighter-red" th:href="@{/}">Return to home</a>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <div class="relative hidden w-0 flex-1 lg:block">
         <img class="absolute inset-0 h-full w-full object-cover" th:src="@{/images/gym-signup.jpg}" alt="Gym">
     </div>
