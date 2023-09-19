@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "roles")
-public @Data class Role {
+public class Role {
 
     /**
      * Represents the unique ID of the role. This is auto-generated.

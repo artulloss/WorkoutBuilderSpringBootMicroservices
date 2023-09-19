@@ -16,9 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public @Data class User {
-
-    private static final long serialVersionUID = 1L;
+public class User {
 
     /**
      * Represents the unique ID of the user. This is auto-generated.
