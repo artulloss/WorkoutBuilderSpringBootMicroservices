@@ -10,7 +10,7 @@ public @Data class Workout {
     public int id;
     private String workoutType;
     private Date date;
-    private User createdBy;
+    private UserDTO createdBy;
     private List<Exercise> exercises;
     private int duration;
 
