@@ -1,4 +1,4 @@
-package com.workoutbuilder.enterprise;
+package com.workoutbuilder.enterprise.controller;
 
 import com.workoutbuilder.enterprise.entity.User;
 import com.workoutbuilder.enterprise.service.IUserService;
