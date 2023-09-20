@@ -1,14 +1,16 @@
 package com.workoutbuilder.enterprise.dao;
 
 import com.workoutbuilder.enterprise.dto.Exercise;
+import lombok.val;
+import org.springframework.stereotype.Repository;
 
-public class ExerciseDAO implements IExerciseDAO {
+@Repository
+public abstract class ExerciseDAO implements IExerciseDAO {
     /**
      * @param exercise
      */
     @Override
     public void saveExercise(Exercise exercise) {
-
     }
 
     /**
@@ -27,11 +29,12 @@ public class ExerciseDAO implements IExerciseDAO {
 
     }
 
-    /**
-     * @return
-     */
-    @Override
-    public Exercise fetchExercise() {
-        return null;
-    }
+//    /**
+//     * @return
+//     */
+//    @Override
+//    public Exercise fetchExercise() {
+//        val retrofitInstance = RetrofitInstance.getRetrofitInstance();
+//
+//    }
 }

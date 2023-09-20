@@ -10,4 +10,12 @@ class EnterpriseApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void testGetWorkout() {
+
+	}
+
+
+
+
 }
