@@ -29,12 +29,8 @@ public abstract class ExerciseDAO implements IExerciseDAO {
 
     }
 
-//    /**
-//     * @return
-//     */
 //    @Override
-//    public Exercise fetchExercise() {
-//        val retrofitInstance = RetrofitInstance.getRetrofitInstance();
-//
+//    public Exercise fetchAll() {
+////        val retrofitInstance = RetrofitInstance.getRetrofitInstance();
 //    }
 }

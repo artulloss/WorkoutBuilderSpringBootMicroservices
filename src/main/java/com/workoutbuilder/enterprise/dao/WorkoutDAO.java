@@ -2,36 +2,39 @@ package com.workoutbuilder.enterprise.dao;
 
 import com.workoutbuilder.enterprise.dto.Workout;
 
+import java.util.List;
+
 public class WorkoutDAO implements IWorkoutDAO {
+
     /**
-     * @param exercise
+     * @param workout
      */
     @Override
-    public void saveWorkout(Workout exercise) {
+    public void saveWorkout(Workout workout) {
 
     }
 
     /**
-     * @param exercise
+     * @param workout
      */
     @Override
-    public void updateWorkout(Workout exercise) {
+    public void updateWorkout(Workout workout) {
 
     }
 
     /**
-     * @param exercise
+     * @param workout
      */
     @Override
-    public void deleteWorkout(Workout exercise) {
+    public void deleteWorkout(Workout workout) {
 
     }
 
     /**
-     * @return
+     * @return Workout
      */
     @Override
-    public Workout fetchWorkout() {
+    public List<Workout> fetchAll() {
         return null;
     }
 }

@@ -1,13 +1,17 @@
 package com.workoutbuilder.enterprise.service;
 
+import com.workoutbuilder.enterprise.dao.IExerciseDAO;
 import com.workoutbuilder.enterprise.dto.Exercise;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ExerciseService implements IExerciseService {
-
+public class ExerciseServiceStub implements IExerciseService
+{
+    @Autowired
+    IExerciseDAO exerciseDAO;
 
     /**
      * @return
@@ -19,11 +23,15 @@ public class ExerciseService implements IExerciseService {
 
     /**
      * @param id unique identifier for an exercise
-     * @return our matching exercise or null if not found
+     * @return
      */
     @Override
     public Exercise fetchById(int id) {
-        return null;
+        Exercise exercise = new Exercise();
+        exercise.setId(1);
+        exercise.setName("Bench Press");
+        exercise.setDescription("Lay on bench and press barbell");
+        return exercise;
     }
 
     /**
@@ -37,8 +45,8 @@ public class ExerciseService implements IExerciseService {
 
     /**
      * @param exercise
-     * @return fluent
-     * @throws Exception If error occurs while saving
+     * @return
+     * @throws Exception
      */
     @Override
     public Exercise save(Exercise exercise) throws Exception {
