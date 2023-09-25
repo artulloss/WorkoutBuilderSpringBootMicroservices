@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 public @Data class UserDTO {
@@ -28,4 +30,7 @@ public @Data class UserDTO {
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
             message = "Password should have at least one lowercase, one uppercase, one number, one special character and no spaces.")
     private String password;
+
+    private List<WorkoutDTO> workouts;
+    private List<ExerciseDTO> exercises;
 }

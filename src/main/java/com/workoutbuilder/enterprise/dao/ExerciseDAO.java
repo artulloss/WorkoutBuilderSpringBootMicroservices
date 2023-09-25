@@ -1,37 +1,23 @@
 package com.workoutbuilder.enterprise.dao;
 
-import com.workoutbuilder.enterprise.dto.Exercise;
+import com.workoutbuilder.enterprise.dto.ExerciseDTO;
 
 public class ExerciseDAO implements IExerciseDAO {
-    /**
-     * @param exercise
-     */
-    @Override
-    public void saveExercise(Exercise exercise) {
 
+    @Override
+    public void saveExercise(ExerciseDTO exercise) {
     }
 
-    /**
-     * @param exercise For update, send the same id, and change everything else
-     */
     @Override
-    public void updateExercise(Exercise exercise) {
-
+    public void updateExercise(ExerciseDTO exercise) {
     }
 
-    /**
-     * @param exercise
-     */
     @Override
-    public void deleteExercise(Exercise exercise) {
-
+    public void deleteExercise(ExerciseDTO exerciseDTO) {
     }
 
-    /**
-     * @return
-     */
     @Override
-    public Exercise fetchExercise() {
+    public ExerciseDTO fetchExercise() {
         return null;
     }
 }
