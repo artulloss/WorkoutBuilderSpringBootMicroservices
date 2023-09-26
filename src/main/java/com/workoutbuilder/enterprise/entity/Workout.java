@@ -1,6 +1,7 @@
 package com.workoutbuilder.enterprise.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -17,12 +18,15 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull(message = "Name cannot be null")
     @Column(nullable = false)
     private String name;
 
-    @Column
+    @NotNull(message = "Description cannot be null")
+    @Column(nullable = false)
     private String description;
 
+    @NotNull(message = "Duration cannot be null")
     @Column(nullable = false)
     private int duration;
 
@@ -34,7 +38,8 @@ public class Workout {
     )
     private List<Exercise> exercises;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @NotNull(message = "User cannot be null")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
