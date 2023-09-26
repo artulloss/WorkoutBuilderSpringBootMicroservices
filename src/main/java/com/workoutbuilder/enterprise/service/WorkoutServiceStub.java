@@ -1,6 +1,6 @@
 package com.workoutbuilder.enterprise.service;
 
-import com.workoutbuilder.enterprise.dto.Workout;
+import com.workoutbuilder.enterprise.entity.Workout;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,7 +17,7 @@ public class WorkoutServiceStub implements IWorkoutService {
     public Workout fetchById(int id) {
         Workout workout = new Workout();
         workout.setId(12);
-        workout.setWorkoutType("Cardio");
+        workout.setDuration(45);
 
         return workout;
     }

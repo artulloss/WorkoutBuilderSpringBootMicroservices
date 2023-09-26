@@ -1,7 +1,7 @@
 package com.workoutbuilder.enterprise;
 
 import com.workoutbuilder.enterprise.dto.ExerciseType;
-import com.workoutbuilder.enterprise.dto.Workout;
+import com.workoutbuilder.enterprise.entity.Workout;
 import com.workoutbuilder.enterprise.entity.Exercise;
 import com.workoutbuilder.enterprise.entity.User;
 import com.workoutbuilder.enterprise.service.IExerciseService;
@@ -38,13 +38,13 @@ public class EnterpriseApplicationTests {
 	}
 
 	/**
-	 * Tests fetchById method checks for workout type
+	 * Tests fetchById method checks for workout duration
 	 */
 	@Test
-	void fetchWorkoutTypeById() {
+	void fetchWorkoutDurationById() {
 		Workout workout = workoutService.fetchById(12);
-		String workoutType = workout.getWorkoutType();
-		assertEquals("Cardio", workoutType);
+		int workoutDuration = workout.getDuration();
+		assertEquals(45, workoutDuration);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class EnterpriseApplicationTests {
 
 	@Test
 	@WithMockUser(username = "mockuser@testing.com")
-	void loggedInUserCanCreateAnExerciseWithNoDescription() {
+	void loggedInUserGetsErrorWhenCreatingAnExerciseWithNoDescription() {
 		givenThereIsAUserLoggedIn();
 		Exception exception = whenTheUserCreatesAnExerciseWithNoDescription();
 		thenThereIsAnErrorMessageSpecifyingDescriptionCannotBeNull(exception);

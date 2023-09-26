@@ -1,6 +1,6 @@
 package com.workoutbuilder.enterprise.service;
 
-import com.workoutbuilder.enterprise.dto.Workout;
+import com.workoutbuilder.enterprise.entity.Workout;
 
 public interface IWorkoutService {
 
