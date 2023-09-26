@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public @Data class ExerciseDTO {
-
     private long id;
 
     @NotEmpty(message = "Exercise name is required.")
@@ -24,6 +23,6 @@ public @Data class ExerciseDTO {
     @NotEmpty(message = "Exercise type is required.")
     private ExerciseType exerciseType;
 
-    private long createdByUserId;
+    private String createdBy;
 
 }

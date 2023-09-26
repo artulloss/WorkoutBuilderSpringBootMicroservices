@@ -25,7 +25,7 @@ public class Exercise {
     @Enumerated(EnumType.STRING)
     private ExerciseType exerciseType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 }
