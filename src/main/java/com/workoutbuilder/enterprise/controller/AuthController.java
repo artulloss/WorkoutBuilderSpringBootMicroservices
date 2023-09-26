@@ -126,6 +126,27 @@ public class AuthController {
     }
 
     /**
+     * Generic endpoint to handle URLs with an ID with a slash.
+     * This can validate the ID and return an error page if the ID is not valid.
+     * If valid, redirect user to dashboard.
+     * This might be useful to prevent potential issues caused by third-party tools or bots.
+     *
+     * @param id provided in the URL.
+     * @return error page if the ID is invalid or not related to the authenticated user.
+     */
+    @GetMapping("/{id}/")
+    public String handleIdOnlyEndpointWithSlash(@PathVariable("id") Long id, Principal principal) {
+        User currentUser = userService.findByEmail(principal.getName());
+
+        if (id == null || currentUser.getId() != id) {
+            return "/error";
+        }
+        else {
+            return "redirect:/" + id + "/dashboard";
+        }
+    }
+
+    /**
      * Maps to the user's dashboard page.
      *
      * @param id user's unique ID.

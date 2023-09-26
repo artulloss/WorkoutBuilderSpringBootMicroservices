@@ -1,13 +1,11 @@
 package com.workoutbuilder.enterprise.dao;
 
-import com.workoutbuilder.enterprise.dto.Exercise;
-import com.workoutbuilder.enterprise.dto.Workout;
+import com.workoutbuilder.enterprise.dto.WorkoutDTO;
 
 public interface IWorkoutDAO {
 
-    void saveWorkout(Workout exercise);
-    void updateWorkout(Workout exercise);
-    void deleteWorkout(Workout exercise);
-    Workout fetchWorkout();
-
+    void saveWorkout(WorkoutDTO workoutDTO);
+    void updateWorkout(WorkoutDTO workoutDTO);
+    void deleteWorkout(WorkoutDTO workout);
+    WorkoutDTO fetchWorkout();
 }
