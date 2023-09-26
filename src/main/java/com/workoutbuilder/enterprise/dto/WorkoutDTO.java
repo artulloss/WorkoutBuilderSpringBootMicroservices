@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +30,12 @@ public @Data class WorkoutDTO {
     @Min(value = 1, message = "Duration should be a positive value.")
     private int duration;
 
+    private List<LocalDate> datesCompleted = new ArrayList<>();
+
     @NotEmpty(message = "At least one exercise is required.")
     private List<ExerciseDTO> exercises = new ArrayList<>();
 
     @NotNull(message = "User ID is required.")
     private long createdByUserId;
+
 }

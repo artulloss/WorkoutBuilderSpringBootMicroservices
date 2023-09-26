@@ -1,7 +1,7 @@
 package com.workoutbuilder.enterprise;
 
 import com.workoutbuilder.enterprise.dto.ExerciseType;
-import com.workoutbuilder.enterprise.dto.WorkoutDTO;
+import com.workoutbuilder.enterprise.dto.Workout;
 import com.workoutbuilder.enterprise.entity.Exercise;
 import com.workoutbuilder.enterprise.entity.User;
 import com.workoutbuilder.enterprise.service.IExerciseService;
@@ -46,6 +46,7 @@ public class EnterpriseApplicationTests {
 		String workoutType = workout.getWorkoutType();
 		assertEquals("Cardio", workoutType);
 	}
+
 	/**
 	 * Test case to ensure that a logged-in user can create an exercise.
 	 * It checks the exercise creation flow including saving it to the database

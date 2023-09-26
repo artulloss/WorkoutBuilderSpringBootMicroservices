@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -29,6 +31,12 @@ public class Workout {
     @NotNull(message = "Duration cannot be null")
     @Column(nullable = false)
     private int duration;
+
+    @ElementCollection
+    @CollectionTable(name = "workout_completion_dates", joinColumns = @JoinColumn(name = "workout_id"))
+    @Column(name = "date_completed")
+    private List<LocalDate> datesCompleted = new ArrayList<>();
+
 
     @ManyToMany
     @JoinTable(
