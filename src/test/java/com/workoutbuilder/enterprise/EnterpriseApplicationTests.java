@@ -14,7 +14,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 /**
  * EnterpriseApplicationTests is a test class that checks the functionality related to creating exercises
  * and ensuring they are persisted properly to the database for logged-in users.

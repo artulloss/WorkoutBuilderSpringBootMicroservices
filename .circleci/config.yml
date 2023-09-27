@@ -7,6 +7,13 @@ jobs: # a collection of steps
     docker: # run the steps with Docker
       - image: circleci/openjdk:17-buster # ...with this image as the primary container; this is where all `steps` will run
 
+    environment:
+      SPRING_DATASOURCE_URL: $SPRING_DATASOURCE_URL
+      SPRING_DATASOURCE_USERNAME: $SPRING_DATASOURCE_USERNAME
+      SPRING_DATASOURCE_PASSWORD: $SPRING_DATASOURCE_PASSWORD
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: $SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+      SPRING_JPA_HIBERNATE_DDL_AUTO: $SPRING_JPA_HIBERNATE_DDL_AUTO
+
     steps: # a collection of executable commands
 
       - checkout # check out source code to working directory

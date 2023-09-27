@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class WorkoutServiceStub implements IWorkoutService {
 
-
     /**
      * Fetch workout by a given ID
      *
