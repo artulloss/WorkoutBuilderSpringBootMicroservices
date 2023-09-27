@@ -25,9 +25,6 @@ jobs: # a collection of steps
           paths:
             - ~/.m2
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-      - run:
-          name: "What was my custom environment variable?"
-          command: echo {{ $SPRING_DATASOURCE_URL }}
       - run: mvn package # run the actual tests
 
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
