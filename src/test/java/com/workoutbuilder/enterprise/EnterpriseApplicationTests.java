@@ -5,7 +5,7 @@ import com.workoutbuilder.enterprise.entity.Workout;
 import com.workoutbuilder.enterprise.entity.Exercise;
 import com.workoutbuilder.enterprise.entity.User;
 import com.workoutbuilder.enterprise.service.IExerciseService;
-import com.workoutbuilder.enterprise.service.IWorkoutService;
+import com.workoutbuilder.enterprise.service.IWorkoutServiceStub;
 import com.workoutbuilder.enterprise.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EnterpriseApplicationTests {
 
 	@Autowired
-	private IWorkoutService workoutService;
+	private IWorkoutServiceStub workoutService;
 
 	@Autowired
 	private IExerciseService exerciseService;

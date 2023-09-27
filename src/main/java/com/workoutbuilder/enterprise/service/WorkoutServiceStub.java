@@ -4,7 +4,7 @@ import com.workoutbuilder.enterprise.entity.Workout;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WorkoutServiceStub implements IWorkoutService {
+public class WorkoutServiceStub implements IWorkoutServiceStub {
 
     /**
      * Fetch workout by a given ID
