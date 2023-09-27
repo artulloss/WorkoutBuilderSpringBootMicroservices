@@ -27,7 +27,7 @@ public @Data class UserDTO {
     private String email;
 
     @Size(min = 8, max = 50, message = "Password should be between 8 and 50 characters.")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", // https://regex101.com/r/xNouwv/1
             message = "Password should have at least one lowercase, one uppercase, one number, one special character and no spaces.")
     private String password;
 
