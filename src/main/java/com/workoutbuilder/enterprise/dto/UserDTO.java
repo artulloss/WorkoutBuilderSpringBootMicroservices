@@ -15,10 +15,12 @@ import java.util.List;
 public @Data class UserDTO {
     private long id;
 
-    @Size(min = 2, max = 50, message = "First name should be between 2 and 50 characters.")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Name can only contain letters without spaces.")
+    @Size(min = 2, max = 50, message = "Name length should be between 2 to 50 characters.")
     private String firstName;
 
-    @Size(min = 2, max = 50, message = "Last name should be between 2 and 50 characters.")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Name can only contain letters without spaces.")
+    @Size(min = 2, max = 50, message = "Name length should be between 2 to 50 characters.")
     private String lastName;
 
     @NotEmpty(message = "This field is required.")

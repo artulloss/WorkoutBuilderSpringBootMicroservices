@@ -42,7 +42,8 @@ public class UserService implements IUserService {
     @Override
     public void saveUser(UserDTO userDTO) {
         User user = new User();
-        user.setName(userDTO.getFirstName() + " " + userDTO.getLastName());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
@@ -53,6 +54,16 @@ public class UserService implements IUserService {
 
         user.setRoles(List.of(role));
         userRepository.save(user);
+    }
+
+    /**
+     * Deletes the provided User from the database.
+     *
+     * @param user the user to be deleted
+     */
+    @Override
+    public void deleteUser(User user) {
+        userRepository.delete(user);
     }
 
     /**

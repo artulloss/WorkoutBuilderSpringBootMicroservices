@@ -29,7 +29,13 @@ public class User {
      * Represents the full name of the user.
      */
     @Column(nullable = false)
-    private String name;
+    private String firstName;
+
+    /**
+     * Represents the last name of the user.
+     */
+    @Column(nullable = false)
+    private String lastName;
 
     /**
      * Represents the email address of the user. This is unique for each user.
