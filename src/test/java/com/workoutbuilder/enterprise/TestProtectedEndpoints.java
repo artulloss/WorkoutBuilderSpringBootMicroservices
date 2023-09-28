@@ -19,7 +19,7 @@ class TestProtectedEndpoints {
     @Test
     @WithMockUser(username = "mockuser@testing.com")
     public void userCanAccessTheirOwnDashboard() throws Exception {
-        this.mockMvc.perform(get("/3/dashboard"))
+        this.mockMvc.perform(get("/4/dashboard"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("dashboard"));
     }
@@ -27,7 +27,7 @@ class TestProtectedEndpoints {
     @Test
     @WithMockUser(username = "mockuser@testing.com")
     public void userCanAccessTheirOwnSettings() throws Exception {
-        this.mockMvc.perform(get("/3/settings"))
+        this.mockMvc.perform(get("/4/settings"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("settings"));
     }
@@ -50,14 +50,14 @@ class TestProtectedEndpoints {
 
     @Test
     void userCannotAccessDashboardWithoutLoggingIn() throws Exception {
-        this.mockMvc.perform(get("/3/dashboard"))
+        this.mockMvc.perform(get("/4/dashboard"))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("/error"));
     }
 
     @Test
     void userCannotAccessSettingsWithoutLoggingIn() throws Exception {
-        this.mockMvc.perform(get("/3/settings"))
+        this.mockMvc.perform(get("/4/settings"))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("/error"));
     }
@@ -65,9 +65,9 @@ class TestProtectedEndpoints {
     @Test
     @WithMockUser(username = "mockuser@testing.com")
     void userIsRedirectedBasedOnEndpointID() throws Exception {
-        this.mockMvc.perform(get("/3"))
+        this.mockMvc.perform(get("/4"))
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/3/dashboard"));
+                .andExpect(redirectedUrl("/4/dashboard"));
 
         this.mockMvc.perform(get("/2"))
                 .andExpect(status().isOk())
@@ -77,9 +77,9 @@ class TestProtectedEndpoints {
     @Test
     @WithMockUser(username = "mockuser@testing.com")
     void userIsRedirectedBasedOnEndpointIDWithSlash() throws Exception {
-        this.mockMvc.perform(get("/3/"))
+        this.mockMvc.perform(get("/4/"))
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/3/dashboard"));
+                .andExpect(redirectedUrl("/4/dashboard"));
 
         this.mockMvc.perform(get("/2/"))
                 .andExpect(status().isOk())
