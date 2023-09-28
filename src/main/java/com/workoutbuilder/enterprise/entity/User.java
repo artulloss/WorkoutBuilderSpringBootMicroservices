@@ -26,7 +26,7 @@ public class User {
     private long id;
 
     /**
-     * Represents the full name of the user.
+     * Represents the first name of the user.
      */
     @Column(nullable = false)
     private String firstName;
