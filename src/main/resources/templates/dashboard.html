@@ -22,7 +22,7 @@
 <body>
 <div th:replace="fragments/topnav :: navbar"></div>
 <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-  <h1>Hello, <span th:text = "${user.getName()}"></span></h1>
+  <h1>Hello, <span th:text = "${user.getFirstName()} + ' ' + ${user.getLastName()}"></span></h1>
 </main>
 </body>
 </html>

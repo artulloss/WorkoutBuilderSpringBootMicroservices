@@ -16,6 +16,13 @@ public interface IUserService {
     void saveUser(UserDTO userDTO);
 
     /**
+     * Deletes the provided User from the MySQL db.
+     *
+     * @param user The user to be deleted.
+     */
+    void deleteUser(User user);
+
+    /**
      * Retrieves a user entity from the MySQL db based on their email.
      *
      * @param email The email address of the user to be retrieved.

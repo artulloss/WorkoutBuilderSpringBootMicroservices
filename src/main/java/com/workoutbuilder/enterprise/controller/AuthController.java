@@ -7,10 +7,9 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.security.Principal;
 
 /**
@@ -49,10 +48,11 @@ public class AuthController {
      * @return name of the login view or redirect to the user's dashboard.
      */
     @GetMapping("/login")
-    public String login(Principal principal) {
+    public String login(Principal principal, RedirectAttributes redirectAttributes) {
         if (principal != null) {
             User currentUser = userService.findByEmail(principal.getName());
             if (currentUser != null) {
+                redirectAttributes.addFlashAttribute("userLoggedIn", true);
                 return "redirect:/" + currentUser.getId() + "/dashboard";
             }
         }
@@ -90,7 +90,7 @@ public class AuthController {
      * @return redirect to the login page if successful, else returns to the signup page with errors.
      */
     @PostMapping("/signup")
-    public String signupUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result, Model model) {
+    public String signupUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
         User existingUser = userService.findByEmail(userDTO.getEmail());
 
         if (existingUser != null) {
@@ -101,6 +101,7 @@ public class AuthController {
             return "/signup";
         }
         userService.saveUser(userDTO);
+        redirectAttrs.addFlashAttribute("accountCreated", true);
         return "redirect:/login";
     }
 
@@ -184,5 +185,18 @@ public class AuthController {
 
         model.addAttribute("user", currentUser);
         return "settings";
+    }
+
+    @PostMapping("/{id}/deleteaccount")
+    public String deleteUser(@PathVariable("id") Long id, Principal principal, RedirectAttributes redirectAttrs) {
+        User currentUser = userService.findByEmail(principal.getName());
+
+        if (id == null || currentUser.getId() != id) {
+            return "/error";
+        }
+
+        userService.deleteUser(currentUser);
+        redirectAttrs.addFlashAttribute("accountDeleted", true);
+        return "redirect:/";
     }
 }

@@ -2,9 +2,12 @@ package com.workoutbuilder.enterprise.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +37,8 @@ public class Workout {
 
     @ElementCollection
     @CollectionTable(name = "workout_completion_dates", joinColumns = @JoinColumn(name = "workout_id"))
-    @Column(name = "date_completed")
-    private List<LocalDate> datesCompleted = new ArrayList<>();
-
+    @Column(name = "datetime_completed")
+    private List<LocalDateTime> datesTimesCompleted = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
