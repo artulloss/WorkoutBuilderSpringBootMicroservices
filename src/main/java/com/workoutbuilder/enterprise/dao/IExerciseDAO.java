@@ -55,5 +55,5 @@ public interface IExerciseDAO {
      *
      * @param id The ID of the exercise to be deleted.
      */
-    void deleteExercise(int id);
+    void deleteExercise(int id) throws Exception;
 }

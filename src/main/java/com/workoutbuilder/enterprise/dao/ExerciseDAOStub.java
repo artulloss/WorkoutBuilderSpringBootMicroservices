@@ -5,12 +5,13 @@ import com.workoutbuilder.enterprise.dto.ExerciseType;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
 public class ExerciseDAOStub implements IExerciseDAO{
 
-    List<Exercise> exercises = new ArrayList<>();
+    HashMap<Integer, Exercise> exercises = new HashMap<>();
 
     /**
      * Retrieve all exercises stored in the system.
@@ -18,8 +19,9 @@ public class ExerciseDAOStub implements IExerciseDAO{
      * @return A list of all exercises.
      */
     @Override
-    public List<Exercise> findAll() {
-        return exercises;
+    public List<Exercise> findAll()
+    {
+        return new ArrayList<>(exercises.values());
     }
 
     /**
@@ -30,7 +32,7 @@ public class ExerciseDAOStub implements IExerciseDAO{
      */
     @Override
     public Exercise findById(int id) {
-        return null;
+        return exercises.get(id);
     }
 
     /**
@@ -64,7 +66,8 @@ public class ExerciseDAOStub implements IExerciseDAO{
      */
     @Override
     public Exercise saveExercise(Exercise exercise) throws Exception {
-        exercises.add(exercise);
+        int id = exercise.getId();
+        exercises.put(id, exercise);
         return exercise;
     }
 
@@ -74,7 +77,7 @@ public class ExerciseDAOStub implements IExerciseDAO{
      * @param id The ID of the exercise to be deleted.
      */
     @Override
-    public void deleteExercise(int id) {
-
+    public void deleteExercise(int id) throws Exception {
+        exercises.remove(id);
     }
 }

@@ -29,11 +29,11 @@ public class ExerciseServiceStub implements IExerciseService{
     /**
      * Delete an exercise.
      *
-     * @param exercise The exercise to be deleted.
+     * @param id The id of the exercise to be deleted.
      */
     @Override
-    public void deleteExercise(Exercise exercise) {
-
+    public void deleteExercise(int id) throws Exception {
+        exerciseDAO.deleteExercise(id);
     }
 
     /**
@@ -44,7 +44,7 @@ public class ExerciseServiceStub implements IExerciseService{
      */
     @Override
     public Exercise findById(int id) {
-        return null;
+        return exerciseDAO.findById(id);
     }
 
     /**

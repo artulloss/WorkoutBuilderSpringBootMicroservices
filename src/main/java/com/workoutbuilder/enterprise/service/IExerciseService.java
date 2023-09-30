@@ -21,9 +21,9 @@ public interface IExerciseService {
     /**
      * Delete an exercise.
      *
-     * @param exercise The exercise to be deleted.
+     * @param id The exercise of the exercise to be deleted.
      */
-    void deleteExercise(Exercise exercise);
+    void deleteExercise(int id) throws Exception;
 
     /**
      * Find an exercise by its ID.
