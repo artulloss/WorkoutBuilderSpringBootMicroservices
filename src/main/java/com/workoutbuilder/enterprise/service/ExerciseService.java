@@ -49,13 +49,21 @@ public class ExerciseService implements IExerciseService {
     }
 
     /**
+     * Delete an exercise.
+     *
+     * @param id The exercise of the exercise to be deleted.
+     */
+    @Override
+    public void deleteExercise(int id) throws Exception {
+        exerciseDAO.deleteExercise(id);
+    }
+
+    /**
      * Deletes a specific exercise.
      *
      * @param exercise the exercise to be deleted
      */
-    public void deleteExercise(Exercise exercise) {
-        exerciseDAO.deleteExercise(exercise.getId());
-    }
+
 
     /**
      * Finds a specific exercise by its ID.
