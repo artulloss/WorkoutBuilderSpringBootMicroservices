@@ -1,52 +1,99 @@
 package com.workoutbuilder.enterprise.service;
 
-import com.workoutbuilder.enterprise.dao.ExerciseRepository;
+import com.workoutbuilder.enterprise.dao.IExerciseDAO;
+import com.workoutbuilder.enterprise.dao.IWorkoutDAO;
+import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
-import com.workoutbuilder.enterprise.entity.Exercise;
-import com.workoutbuilder.enterprise.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Provides service-level operations for managing exercises.
+ * This service layer interacts with the underlying DAO to perform CRUD operations on exercises.
+ */
 @Service
 public class ExerciseService implements IExerciseService {
 
-    private final ExerciseRepository exerciseRepository;
+    @Autowired
+    private IWorkoutDAO workoutDAO;
 
-    public ExerciseService(ExerciseRepository exerciseRepository) {
-        this.exerciseRepository = exerciseRepository;
+    @Autowired
+    private IExerciseDAO exerciseDAO;
+
+    /**
+     * Default constructor.
+     */
+    public ExerciseService() {
     }
 
-    public Exercise saveExercise(Exercise exercise) {
-        return exerciseRepository.save(exercise);
+    /**
+     * Overloaded constructor for Dep. Inj. of the exercise DAO.
+     *
+     * @param exerciseDAO the DAO for exercises
+     */
+    public ExerciseService(IExerciseDAO exerciseDAO) {
+        this.exerciseDAO = exerciseDAO;
     }
 
+    /**
+     * Saves a new exercise.
+     *
+     * @param exercise the exercise to be saved
+     * @return the saved or updated exercise
+     * @throws Exception if any issues arise during the save operation
+     */
+    public Exercise saveExercise(Exercise exercise) throws Exception {
+        return exerciseDAO.saveExercise(exercise);
+    }
+
+    /**
+     * Deletes a specific exercise.
+     *
+     * @param exercise the exercise to be deleted
+     */
     public void deleteExercise(Exercise exercise) {
-        exerciseRepository.delete(exercise);
+        exerciseDAO.deleteExercise(exercise.getId());
     }
 
-    public Exercise updateExercise(Exercise exercise) {
-        // Assuming you check that the ID exists before updating
-        return exerciseRepository.save(exercise);
+    /**
+     * Finds a specific exercise by its ID.
+     *
+     * @param id the ID of the exercise
+     * @return the exercise matching the provided ID
+     */
+    public Exercise findById(int id) {
+        return exerciseDAO.findById(id);
     }
 
-    public Exercise findById(long id) {
-        return exerciseRepository.findById(id).orElse(null);
-    }
-
+    /**
+     * Retrieves all exercises.
+     *
+     * @return a list of all exercises
+     */
     public List<Exercise> findAll() {
-        return exerciseRepository.findAll();
+        return exerciseDAO.findAll();
     }
 
+    /**
+     * Retrieves all exercises associated with a specific workout.
+     *
+     * @param workoutId the ID of the workout
+     * @return a list of exercises associated with the specified workout
+     */
+    public List<Exercise> findExercisesByWorkoutId(int workoutId) {
+        workoutId = workoutDAO.findById(workoutId).getId();
+        return exerciseDAO.findExercisesByWorkoutId(workoutId);
+    }
+
+    /**
+     * Finds exercises of a specific type.
+     *
+     * @param type the type/category of the exercise
+     * @return a list of exercises that match the specified type
+     */
     public List<Exercise> findByExerciseType(ExerciseType type) {
-        return exerciseRepository.findByExerciseType(type);
-    }
-
-    public List<Exercise> findByUser(User user) {
-        return exerciseRepository.findByUser(user);
-    }
-
-    public long count() {
-        return exerciseRepository.count();
+        return exerciseDAO.findByExerciseType(type);
     }
 }

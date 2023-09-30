@@ -1,67 +1,27 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="UTF-8">
-    <title>Workout Builder</title>
-    <link rel="stylesheet" th:href="@{/css/application.css}">
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'deep-red': '#8B0000',
-                        'lighter-red': '#A10A0A',
-                    }
-                }
-            }
+  <meta charset="UTF-8">
+  <title>Workout Builder — Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/application.css}">
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'deep-red': '#8B0000',
+            'lighter-red': '#A10A0A',
+          }
         }
-    </script>
+      }
+    }
+  </script>
 </head>
 <body>
-<nav x-data="{ open: false, dropdownOpen: false }" class="bg-white">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16">
-            <div class="flex">
-                <div class="flex flex-shrink-0 items-center">
-                        <img class="h-8 w-auto" th:src="@{/images/logo.svg}" alt="Workout Builder">
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
-<main>
-    <div th:replace="fragments/notification :: accountDeletedNotification"></div>
-    <div class="relative">
-        <div class="mx-auto max-w-7xl">
-            <div class="relative z-10 pt-14 lg:w-full lg:max-w-2xl">
-                <svg class="absolute inset-y-0 right-8 hidden h-full w-80 translate-x-1/2 transform fill-white lg:block" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                    <polygon points="0,0 90,0 50,100 0,100" />
-                </svg>
-                <div class="relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0">
-                    <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-                        <div class="hidden sm:mb-10 sm:flex">
-                            <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-500 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                                Our project is on GitHub. <a href="https://github.com/artulloss/WorkoutBuilderSpringBootMicroservices" target="_blank" class="whitespace-nowrap font-semibold text-deep-red"><span class="absolute inset-0" aria-hidden="true"></span>View it here <span aria-hidden="true">&rarr;</span></a>
-                            </div>
-                        </div>
-                        <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Workout Builder</h1>
-                        <p class="mt-6 text-lg leading-8 text-gray-600">
-                            Discover a fitness platform that allows you to craft a personalized workout regimen. Log daily exercises, view previous workouts, and add exercises.
-                        </p>
-                        <div class="mt-10 flex items-center gap-x-6">
-                            <a th:href="@{/signup}" class="rounded-md bg-deep-red px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lighter-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deep-red">Sign Up</a>
-                            <a th:href="@{/login}" class="text-sm font-semibold leading-6 text-gray-900">Log in &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-            <img class="aspect-[3/2] object-cover lg:aspect-auto lg:h-full lg:w-full" th:src="@{/images/gym-landing.jpg}" alt="Gym">
-        </div>
-    </div>
+<div th:replace="fragments/topnav :: navbar"></div>
+<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 </main>
 </body>
 </html>
