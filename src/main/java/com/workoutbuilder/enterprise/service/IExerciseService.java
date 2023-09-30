@@ -1,20 +1,22 @@
 package com.workoutbuilder.enterprise.service;
 
+import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
-import com.workoutbuilder.enterprise.entity.Exercise;
-import com.workoutbuilder.enterprise.entity.User;
 
 import java.util.List;
 
+/**
+ * Interface defining service-level operations for managing exercises.
+ */
 public interface IExerciseService {
 
     /**
-     * Save or update an exercise.
+     * Save an exercise.
      *
      * @param exercise The exercise to be saved or updated.
      * @return The saved or updated exercise.
      */
-    Exercise saveExercise(Exercise exercise);
+    Exercise saveExercise(Exercise exercise) throws Exception;
 
     /**
      * Delete an exercise.
@@ -24,20 +26,12 @@ public interface IExerciseService {
     void deleteExercise(Exercise exercise);
 
     /**
-     * Update an exercise.
-     *
-     * @param exercise The exercise to be updated.
-     * @return The updated exercise.
-     */
-    Exercise updateExercise(Exercise exercise);
-
-    /**
      * Find an exercise by its ID.
      *
      * @param id The ID of the exercise to be found.
-     * @return The exercise with the given ID, or null if not found.
+     * @return The exercise with the given ID.
      */
-    Exercise findById(long id);
+    Exercise findById(int id);
 
     /**
      * Find all exercises.
@@ -55,17 +49,10 @@ public interface IExerciseService {
     List<Exercise> findByExerciseType(ExerciseType type);
 
     /**
-     * Find exercises created by a specific user.
+     * Find exercises by a workout ID.
      *
-     * @param user The user whose exercises are to be found.
-     * @return A list of exercises created by the given user.
+     * @param workoutId The ID of the workout to be found.
+     * @return A list of exercises with the given workout ID.
      */
-    List<Exercise> findByUser(User user);
-
-    /**
-     * Count all exercises.
-     *
-     * @return The total number of exercises.
-     */
-    long count();
+    List<Exercise> findExercisesByWorkoutId(int workoutId);
 }

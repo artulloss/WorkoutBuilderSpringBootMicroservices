@@ -1,43 +1,36 @@
 package com.workoutbuilder.enterprise.service;
 
-import com.workoutbuilder.enterprise.entity.Workout;
-import com.workoutbuilder.enterprise.entity.User;
+import com.workoutbuilder.enterprise.dto.Workout;
 
 import java.util.List;
 
+/**
+ * Interface defining service-level operations for managing workouts.
+ */
 public interface IWorkoutService {
 
-
     /**
-     * Save or update a workout.
+     * Save a workout.
      *
-     * @param workout The workout to be saved or updated.
-     * @return The saved or updated workout.
+     * @param workout The workout to be saved.
+     * @return The saved workout.
      */
     Workout saveWorkout(Workout workout);
 
     /**
      * Delete a workout.
      *
-     * @param workout The workout to be deleted.
+     * @param id The workout to be deleted.
      */
-    void deleteWorkout(Workout workout);
-
-    /**
-     * Update a workout.
-     *
-     * @param workout The workout to be updated.
-     * @return The updated workout.
-     */
-    Workout updateWorkout(Workout workout);
+    void deleteWorkout(int id);
 
     /**
      * Find a workout by its ID.
      *
      * @param id The ID of the workout to be found.
-     * @return The workout with the given ID, or null if not found.
+     * @return The workout with the given ID.
      */
-    Workout findById(long id);
+    Workout findById(int id);
 
     /**
      * Find all workouts.
@@ -45,19 +38,4 @@ public interface IWorkoutService {
      * @return A list of all workouts.
      */
     List<Workout> findAll();
-
-    /**
-     * Find workouts created by a specific user.
-     *
-     * @param user The user whose workouts are to be found.
-     * @return A list of workouts created by the given user.
-     */
-    List<Workout> findByUser(User user);
-
-    /**
-     * Count all workouts.
-     *
-     * @return The total number of workouts.
-     */
-    long count();
 }
