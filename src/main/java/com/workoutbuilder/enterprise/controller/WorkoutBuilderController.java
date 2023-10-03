@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,10 @@ public class WorkoutBuilderController {
      * @return name of the index view.
      */
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        Exercise exercise = new Exercise();
+        model.addAttribute("exercise", exercise);
+
         return "/index";
     }
 
@@ -51,6 +55,17 @@ public class WorkoutBuilderController {
         }
 
         return newExercise;
+    }
+
+    @RequestMapping("api/saveExercise")
+    public String saveExercise(Exercise exercise) {
+        try {
+            exerciseService.saveExercise(exercise);
+        } catch (Exception e) {
+            //TODO LOG ERROR
+            return "/index";
+        }
+        return "/index";
     }
 
     @DeleteMapping("api/exercise/{id}")
