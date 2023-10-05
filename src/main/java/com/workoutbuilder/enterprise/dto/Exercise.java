@@ -1,5 +1,6 @@
 package com.workoutbuilder.enterprise.dto;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
