@@ -3,21 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Workout Builder — Dashboard</title>
-  <link rel="stylesheet" th:href="@{/css/application.css}">
+  <link rel="stylesheet" th:href="@{/css/application.dist.css}">
   <script src="//unpkg.com/alpinejs" defer></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'deep-red': '#8B0000',
-            'lighter-red': '#A10A0A',
-          }
-        }
-      }
-    }
-  </script>
 </head>
 <body>
 <div th:replace="fragments/topnav :: navbar"></div>
@@ -32,7 +19,7 @@
       </div>
     </div>
     <br>
-    <button type="submit" class="rounded-md bg-red-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Create Workout</button>
+    <button type="submit" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Create Workout</button>
   </form>
 
   <br><br><br>
@@ -73,7 +60,7 @@
       </div>
     </div>
     <br>
-    <button type="submit" name="submit" value="0" class="rounded-md bg-red-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Submit</button>
+    <button type="submit" name="submit" value="0" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Submit</button>
   </form>
 
 </main>
