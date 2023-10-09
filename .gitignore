@@ -34,3 +34,8 @@ build/
 
 ### Maven ###
 application.properties
+
+# Node
+node_modules/
+pnpm-lock.yaml
+package-lock.json

@@ -30,6 +30,8 @@ public class WorkoutBuilderController {
     public String index(Model model) {
         Exercise exercise = new Exercise();
         model.addAttribute("exercise", exercise);
+        List<Exercise> exercises = exerciseService.findAll();
+        model.addAttribute("exercises", exercises);
         return "/index";
     }
 
