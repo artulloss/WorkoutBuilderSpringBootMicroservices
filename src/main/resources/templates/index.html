@@ -5,6 +5,7 @@
   <title>Workout Builder — Dashboard</title>
   <link rel="stylesheet" th:href="@{/css/application.dist.css}">
   <script src="//unpkg.com/alpinejs" defer></script>
+  <script th:src="@{/js/main.js}" defer></script>
 </head>
 <body>
 <div th:replace="fragments/topnav :: navbar"></div>
@@ -18,17 +19,22 @@
         <input type="number" name="workoutDuration" id="workoutDuration" required min="0" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Time in mins">
       </div>
     </div>
+    <div th:text="${exercises}"></div>
+    <select id="exercisePicker">
+      <option th:each="e : ${exercises}" th:value="${e.id}" th:text="${e.name}">
+      </option>
+    </select>
     <br>
     <button type="submit" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Create Workout</button>
   </form>
 
   <br><br><br>
-  <p th:text="${exercise}" />
-  <label> Create New Exercise</label>
-  <form action="#" th:action="@{/api/saveExercise}" th:object="${exercise}" method="GET">
+  <p th:text="${exercise}"></p>
+  <label>Create New Exercise</label>
+  <form id="createExercise" action="#" th:action="@{/api/exercise}" th:object="${exercise}" method="post">
     <div class="sm:col-span-4">
       <div class="flex items-center">
-        <label for="exerciseId" class="block text-sm font-medium leading-6 text-gray-900" >Exercise Id</label>
+        <label for="exerciseId" class="block text-sm font-medium leading-6 text-gray-900">Exercise Id</label>
         <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md ml-2">
           <input type="number" name="id" id="exerciseId" required min="0" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Id" th:field="*{id}">
         </div>
