@@ -1,6 +1,6 @@
 package com.workoutbuilder.enterprise.dao;
 
-import com.workoutbuilder.enterprise.dto.Exercise;
+import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class ExerciseDAOStub implements IExerciseDAO{
 
-    HashMap<Integer, Exercise> exercises = new HashMap<>();
+    HashMap<Integer, StoredExercise> exercises = new HashMap<>();
 
     /**
      * Retrieve all exercises stored in the system.
@@ -19,7 +19,7 @@ public class ExerciseDAOStub implements IExerciseDAO{
      * @return A list of all exercises.
      */
     @Override
-    public List<Exercise> findAll()
+    public List<StoredExercise> findAll()
     {
         return new ArrayList<>(exercises.values());
     }
@@ -31,7 +31,7 @@ public class ExerciseDAOStub implements IExerciseDAO{
      * @return The exercise with the given ID or null if not found.
      */
     @Override
-    public Exercise findById(int id) {
+    public StoredExercise findById(int id) {
         return exercises.get(id);
     }
 
@@ -42,7 +42,7 @@ public class ExerciseDAOStub implements IExerciseDAO{
      * @return A list of exercises associated with the given workout ID.
      */
     @Override
-    public List<Exercise> findExercisesByWorkoutId(int workoutId) {
+    public List<StoredExercise> findExercisesByWorkoutId(int workoutId) {
         return null;
     }
 
@@ -53,7 +53,7 @@ public class ExerciseDAOStub implements IExerciseDAO{
      * @return A list of exercises of the specified type.
      */
     @Override
-    public List<Exercise> findByExerciseType(ExerciseType type) {
+    public List<StoredExercise> findByExerciseType(ExerciseType type) {
         return null;
     }
 
@@ -65,7 +65,7 @@ public class ExerciseDAOStub implements IExerciseDAO{
      * @throws Exception If there is any issue in saving the exercise.
      */
     @Override
-    public Exercise saveExercise(Exercise exercise) throws Exception {
+    public StoredExercise saveExercise(StoredExercise exercise) throws Exception {
         int id = exercise.getId();
         exercises.put(id, exercise);
         return exercise;

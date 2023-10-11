@@ -1,6 +1,6 @@
 package com.workoutbuilder.enterprise.dao;
 
-import com.workoutbuilder.enterprise.dto.Exercise;
+import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public interface IExerciseDAO {
      *
      * @return A list of all exercises.
      */
-    List<Exercise> findAll();
+    List<StoredExercise> findAll();
 
     /**
      * Find and return an exercise by its unique ID.
@@ -23,7 +23,7 @@ public interface IExerciseDAO {
      * @param id The ID of the exercise to retrieve.
      * @return The exercise with the given ID or null if not found.
      */
-    Exercise findById(int id);
+    StoredExercise findById(int id);
 
     /**
      * Retrieve exercises associated with a specific workout, identified by its ID.
@@ -31,7 +31,7 @@ public interface IExerciseDAO {
      * @param workoutId The unique ID of the workout.
      * @return A list of exercises associated with the given workout ID.
      */
-    List<Exercise> findExercisesByWorkoutId(int workoutId);
+    List<StoredExercise> findExercisesByWorkoutId(int workoutId);
 
     /**
      * Find and return exercises of a specific type.
@@ -39,7 +39,7 @@ public interface IExerciseDAO {
      * @param type The type of exercises to retrieve.
      * @return A list of exercises of the specified type.
      */
-    List<Exercise> findByExerciseType(ExerciseType type);
+    List<StoredExercise> findByExerciseType(ExerciseType type);
 
     /**
      * Save or update a given exercise.
@@ -48,7 +48,7 @@ public interface IExerciseDAO {
      * @return The saved or updated exercise.
      * @throws Exception If there is any issue in saving the exercise.
      */
-    Exercise saveExercise(Exercise exercise) throws Exception;
+    StoredExercise saveExercise(StoredExercise exercise) throws Exception;
 
     /**
      * Delete an exercise identified by its unique ID.

@@ -1,6 +1,6 @@
 package com.workoutbuilder.enterprise.dao;
 
-import com.workoutbuilder.enterprise.dto.Exercise;
+import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import com.workoutbuilder.enterprise.dto.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class ExerciseDAO implements IExerciseDAO {
     /**
      * Represents a storage for exercises using a Map with exercise id as key.
      */
-    private Map<Integer, Exercise> allExercises = new HashMap<>();
+    private Map<Integer, StoredExercise> allExercises = new HashMap<>();
 
     /**
      * Retrieve all exercises.
@@ -31,7 +31,7 @@ public class ExerciseDAO implements IExerciseDAO {
      * @return A list of all exercises.
      */
     @Override
-    public List<Exercise> findAll() {
+    public List<StoredExercise> findAll() {
         return new ArrayList<>(allExercises.values());
     }
 
@@ -42,7 +42,7 @@ public class ExerciseDAO implements IExerciseDAO {
      * @return The exercise if found, otherwise null.
      */
     @Override
-    public Exercise findById(int id) {
+    public StoredExercise findById(int id) {
         return allExercises.get(id);
     }
 
@@ -53,7 +53,7 @@ public class ExerciseDAO implements IExerciseDAO {
      * @return A list of exercises associated with the given workout ID.
      */
     @Override
-    public List<Exercise> findExercisesByWorkoutId(int workoutId) {
+    public List<StoredExercise> findExercisesByWorkoutId(int workoutId) {
         Workout workout = workoutDAO.findById(workoutId);
         return workout.getExercises();
     }
@@ -65,10 +65,10 @@ public class ExerciseDAO implements IExerciseDAO {
      * @return A list of exercises of the specified type.
      */
     @Override
-    public List<Exercise> findByExerciseType(ExerciseType type) {
-        List<Exercise> returnExercises = new ArrayList<>();
-        for (Exercise exercise : allExercises.values()) {
-            if (exercise.getExerciseType().equals(type)) {
+    public List<StoredExercise> findByExerciseType(ExerciseType type) {
+        List<StoredExercise> returnExercises = new ArrayList<>();
+        for (StoredExercise exercise : allExercises.values()) {
+            if (exercise.getType().equals(type)) {
                 returnExercises.add(exercise);
             }
         }
@@ -82,7 +82,7 @@ public class ExerciseDAO implements IExerciseDAO {
      * @return The saved or updated exercise.
      */
     @Override
-    public Exercise saveExercise(Exercise exercise) {
+    public StoredExercise saveExercise(StoredExercise exercise) {
         allExercises.put(exercise.getId(), exercise);
         return exercise;
     }

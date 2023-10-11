@@ -1,6 +1,6 @@
 package com.workoutbuilder.enterprise.service;
 
-import com.workoutbuilder.enterprise.dto.Exercise;
+import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface IExerciseService {
      * @param exercise The exercise to be saved or updated.
      * @return The saved or updated exercise.
      */
-    Exercise saveExercise(Exercise exercise) throws Exception;
+    StoredExercise saveExercise(StoredExercise exercise) throws Exception;
 
     /**
      * Delete an exercise.
@@ -31,14 +31,14 @@ public interface IExerciseService {
      * @param id The ID of the exercise to be found.
      * @return The exercise with the given ID.
      */
-    Exercise findById(int id);
+    StoredExercise findById(int id);
 
     /**
      * Find all exercises.
      *
      * @return A list of all exercises.
      */
-    List<Exercise> findAll();
+    List<StoredExercise> findAll();
 
     /**
      * Find exercises by their type.
@@ -46,7 +46,7 @@ public interface IExerciseService {
      * @param type The type of the exercises to be found.
      * @return A list of exercises with the given type.
      */
-    List<Exercise> findByExerciseType(ExerciseType type);
+    List<StoredExercise> findByExerciseType(ExerciseType type);
 
     /**
      * Find exercises by a workout ID.
@@ -54,5 +54,5 @@ public interface IExerciseService {
      * @param workoutId The ID of the workout to be found.
      * @return A list of exercises with the given workout ID.
      */
-    List<Exercise> findExercisesByWorkoutId(int workoutId);
+    List<StoredExercise> findExercisesByWorkoutId(int workoutId);
 }

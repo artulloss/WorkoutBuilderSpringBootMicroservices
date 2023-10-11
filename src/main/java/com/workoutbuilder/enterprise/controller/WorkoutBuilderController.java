@@ -1,6 +1,6 @@
 package com.workoutbuilder.enterprise.controller;
 
-import com.workoutbuilder.enterprise.dto.Exercise;
+import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.service.IExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,9 +28,9 @@ public class WorkoutBuilderController {
      */
     @GetMapping("/")
     public String index(Model model) {
-        Exercise exercise = new Exercise();
+        StoredExercise exercise = new StoredExercise();
         model.addAttribute("exercise", exercise);
-        List<Exercise> exercises = exerciseService.findAll();
+        List<StoredExercise> exercises = exerciseService.findAll();
         model.addAttribute("exercises", exercises);
         return "/index";
     }
@@ -42,7 +42,7 @@ public class WorkoutBuilderController {
      */
     @GetMapping("api/exercise")
     @ResponseBody
-    public List<Exercise> fetchAllExercises(){
+    public List<StoredExercise> fetchAllExercises(){
         return exerciseService.findAll();
     }
 
@@ -54,7 +54,7 @@ public class WorkoutBuilderController {
      */
     @GetMapping("api/exercise/{id}")
     @ResponseBody
-    public Exercise fetchExerciseById(@PathVariable("id") int id){
+    public StoredExercise fetchExerciseById(@PathVariable("id") int id){
         return exerciseService.findById(id);
     }
 
@@ -66,8 +66,8 @@ public class WorkoutBuilderController {
      */
     @PostMapping(value = "api/exercise", consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public Exercise createExercise(@RequestBody Exercise exercise) {
-        Exercise newExercise = null;
+    public StoredExercise createExercise(@RequestBody StoredExercise exercise) {
+        StoredExercise newExercise = null;
         try {
             newExercise = exerciseService.saveExercise(exercise);
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class WorkoutBuilderController {
      * @return Redirection to the index page.
      */
     @RequestMapping("api/saveExercise")
-    public String saveExercise(Exercise exercise) {
+    public String saveExercise(StoredExercise exercise) {
         try {
             exerciseService.saveExercise(exercise);
         } catch (Exception e) {

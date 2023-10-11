@@ -2,7 +2,7 @@ package com.workoutbuilder.enterprise.service;
 
 import com.workoutbuilder.enterprise.dao.IExerciseDAO;
 import com.workoutbuilder.enterprise.dao.IWorkoutDAO;
-import com.workoutbuilder.enterprise.dto.Exercise;
+import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,7 @@ public class ExerciseService implements IExerciseService {
      * @return the saved or updated exercise
      * @throws Exception if any issues arise during the save operation
      */
-    public Exercise saveExercise(Exercise exercise) throws Exception {
+    public StoredExercise saveExercise(StoredExercise exercise) throws Exception {
         return exerciseDAO.saveExercise(exercise);
     }
 
@@ -71,7 +71,7 @@ public class ExerciseService implements IExerciseService {
      * @param id the ID of the exercise
      * @return the exercise matching the provided ID
      */
-    public Exercise findById(int id) {
+    public StoredExercise findById(int id) {
         return exerciseDAO.findById(id);
     }
 
@@ -80,7 +80,7 @@ public class ExerciseService implements IExerciseService {
      *
      * @return a list of all exercises
      */
-    public List<Exercise> findAll() {
+    public List<StoredExercise> findAll() {
         return exerciseDAO.findAll();
     }
 
@@ -90,7 +90,7 @@ public class ExerciseService implements IExerciseService {
      * @param workoutId the ID of the workout
      * @return a list of exercises associated with the specified workout
      */
-    public List<Exercise> findExercisesByWorkoutId(int workoutId) {
+    public List<StoredExercise> findExercisesByWorkoutId(int workoutId) {
         workoutId = workoutDAO.findById(workoutId).getId();
         return exerciseDAO.findExercisesByWorkoutId(workoutId);
     }
@@ -101,7 +101,7 @@ public class ExerciseService implements IExerciseService {
      * @param type the type/category of the exercise
      * @return a list of exercises that match the specified type
      */
-    public List<Exercise> findByExerciseType(ExerciseType type) {
+    public List<StoredExercise> findByExerciseType(ExerciseType type) {
         return exerciseDAO.findByExerciseType(type);
     }
 }

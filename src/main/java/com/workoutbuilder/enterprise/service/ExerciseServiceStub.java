@@ -1,7 +1,7 @@
 package com.workoutbuilder.enterprise.service;
 
 import com.workoutbuilder.enterprise.dao.IExerciseDAO;
-import com.workoutbuilder.enterprise.dto.Exercise;
+import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ExerciseServiceStub implements IExerciseService{
      * @return The saved or updated exercise.
      */
     @Override
-    public Exercise saveExercise(Exercise exercise) throws Exception {
+    public StoredExercise saveExercise(StoredExercise exercise) throws Exception {
         return exerciseDAO.saveExercise(exercise);
     }
 
@@ -43,7 +43,7 @@ public class ExerciseServiceStub implements IExerciseService{
      * @return The exercise with the given ID.
      */
     @Override
-    public Exercise findById(int id) {
+    public StoredExercise findById(int id) {
         return exerciseDAO.findById(id);
     }
 
@@ -53,7 +53,7 @@ public class ExerciseServiceStub implements IExerciseService{
      * @return A list of all exercises.
      */
     @Override
-    public List<Exercise> findAll() {
+    public List<StoredExercise> findAll() {
         return exerciseDAO.findAll();
     }
 
@@ -64,7 +64,7 @@ public class ExerciseServiceStub implements IExerciseService{
      * @return A list of exercises with the given type.
      */
     @Override
-    public List<Exercise> findByExerciseType(ExerciseType type) {
+    public List<StoredExercise> findByExerciseType(ExerciseType type) {
         return null;
     }
 
@@ -75,7 +75,7 @@ public class ExerciseServiceStub implements IExerciseService{
      * @return A list of exercises with the given workout ID.
      */
     @Override
-    public List<Exercise> findExercisesByWorkoutId(int workoutId) {
+    public List<StoredExercise> findExercisesByWorkoutId(int workoutId) {
         return null;
     }
 }

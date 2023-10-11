@@ -37,7 +37,7 @@ public class Workout {
 
 
     /**
-     * A list of exercises that constitute this workout.
+     * A list of stored exercises that constitute this workout.
      */
-    private List<Exercise> exercises = new ArrayList<>();
+    private List<StoredExercise> exercises = new ArrayList<>();
 }

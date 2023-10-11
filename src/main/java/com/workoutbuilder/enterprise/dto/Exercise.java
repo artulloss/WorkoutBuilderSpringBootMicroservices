@@ -1,35 +1,47 @@
 package com.workoutbuilder.enterprise.dto;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
- * Represents an individual exercise that can be included in a workout.
- * This DTO captures the specific details of an exercise, such as its name, description, and type.
- * Different types of exercises are categorized using the {@link ExerciseType} enum.
+ * Represents an individual exercise that is brought in from an external API.
+ *
+ * This DTO captures the specific details of an exercise, such as its name, description,
+ * type, muscle group, equipment, difficulty level, and instructions.
+ *
+ * Various enums represent different muscles, types, and difficulty levels.
+ * {@link ExerciseMuscle}, {@link ExerciseType}, and {@link ExerciseDifficulty}
  */
 @Data
 public class Exercise {
 
     /**
-     * The unique identifier for this exercise.
-     */
-    private int id;
-
-    /**
-     * The name of the exercise (e.g., "Push-up", "Squat").
+     * The name of the exercise (e.g., "Incline Hammer Curls").
      */
     private String name;
 
     /**
-     * A detailed description of the exercise, potentially including instructions on
-     * how to perform it, the muscles it targets, etc.
+     * The categorization of the exercise, as defined in the {@link ExerciseType} enum.
+     * This helps in grouping similar exercises (e.g., "strength").
      */
-    private String description;
+    private ExerciseType type;
 
     /**
-     * The categorization of the exercise, as defined in the {@link ExerciseType} enum.
-     * This helps in grouping similar exercises.
+     * The muscle group targeted by the exercise, represented using the {@link ExerciseMuscle} enum (e.g., "biceps").
      */
-    private ExerciseType exerciseType;
+    private ExerciseMuscle muscle;
+
+    /**
+     * The equipment required for the exercise (e.g., "dumbbell").
+     */
+    private String equipment;
+
+    /**
+     * The difficulty level of the exercise, represented using the {@link ExerciseDifficulty} enum (e.g., "beginner").
+     */
+    private ExerciseDifficulty difficulty;
+
+    /**
+     * A detailed description of the exercise, including instructions on how to perform it.
+     */
+    private String instructions;
 }
