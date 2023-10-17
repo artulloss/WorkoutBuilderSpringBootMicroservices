@@ -66,14 +66,13 @@ public class WorkoutBuilderController {
      */
     @PostMapping(value = "api/exercise", consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public Exercise createExercise(@RequestBody Exercise exercise) {
-        Exercise newExercise = null;
+    public ResponseEntity createExercise(@RequestBody Exercise exercise) {
         try {
-            newExercise = exerciseService.saveExercise(exercise);
+            Exercise newExercise = exerciseService.saveExercise(exercise);
+            return new ResponseEntity<>(newExercise, HttpStatus.OK);
         } catch (Exception e) {
-            //TODO LOG ERROR
+            return new ResponseEntity<>("Error creating exercise", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return newExercise;
     }
 
     /**

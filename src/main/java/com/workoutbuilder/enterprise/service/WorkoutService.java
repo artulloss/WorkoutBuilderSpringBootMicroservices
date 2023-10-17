@@ -54,7 +54,7 @@ public class WorkoutService implements IWorkoutService {
         if (workoutDAO != null) {
             workoutDAO.deleteWorkout(id);
         } else {
-            
+
         }
     }
 
