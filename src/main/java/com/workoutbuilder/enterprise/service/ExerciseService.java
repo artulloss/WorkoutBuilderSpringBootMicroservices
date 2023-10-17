@@ -91,8 +91,7 @@ public class ExerciseService implements IExerciseService {
      * @return a list of exercises associated with the specified workout
      */
     public List<Exercise> findExercisesByWorkoutId(int workoutId) {
-        workoutId = workoutDAO.findById(workoutId).getId();
-        return exerciseDAO.findExercisesByWorkoutId(workoutId);
+        return exerciseDAO.findExercisesByWorkoutId(workoutDAO.findById(workoutId).getId());
     }
 
     /**
