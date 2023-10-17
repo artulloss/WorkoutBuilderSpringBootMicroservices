@@ -51,7 +51,11 @@ public class WorkoutService implements IWorkoutService {
      */
     @Override
     public void deleteWorkout(int id) {
-        workoutDAO.deleteWorkout(id);
+        if (workoutDAO != null) {
+            workoutDAO.deleteWorkout(id);
+        } else {
+            
+        }
     }
 
     /**
