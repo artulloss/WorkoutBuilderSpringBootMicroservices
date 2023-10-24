@@ -59,8 +59,8 @@ public class WorkoutBuilderController {
         }
     }
 
-    @GetMapping("api/searchExercise")
-    public ResponseEntity searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
+    @GetMapping("api/searchExerciseAutocomplete")
+    public ResponseEntity searchExerciseAutocomplete(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
         List<String> exerciseNames = new ArrayList<String>();
         try {
             List<Exercise> exercises = exerciseService.findByName(name);
@@ -70,6 +70,19 @@ public class WorkoutBuilderController {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             return new ResponseEntity(exerciseNames, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("api/searchExercise")
+    public ResponseEntity searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
+        try {
+            List<Exercise> exercises = exerciseService.findByName(name);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity(exercises, headers, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
