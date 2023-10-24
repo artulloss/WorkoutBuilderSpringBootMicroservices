@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,6 +58,27 @@ public class WorkoutBuilderController {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("api/searchExercise")
+    public ResponseEntity searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
+        List<String> exerciseNames = new ArrayList<String>();
+        try {
+            List<Exercise> exercises = exerciseService.findByName(name);
+            for (Exercise exercise : exercises) {
+                exerciseNames.add(exercise.getName());
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity(exerciseNames, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
+
 
     /**
      * Fetches an exercise by its ID.

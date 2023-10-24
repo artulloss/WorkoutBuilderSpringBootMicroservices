@@ -19,6 +19,8 @@ public interface IExerciseDAO {
      */
     List<Exercise> findAll() throws IOException;
 
+    List<Exercise> findByName(String name) throws IOException;
+
     /**
      * Find and return an exercise by its unique ID.
      *

@@ -5,6 +5,7 @@ import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,11 @@ public class ExerciseDAOStub implements IExerciseDAO{
     public List<Exercise> findAll()
     {
         return new ArrayList<>(exercises.values());
+    }
+
+    @Override
+    public List<Exercise> findByName(String name) throws IOException {
+        return null;
     }
 
     /**

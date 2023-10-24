@@ -30,6 +30,8 @@ public class ExerciseDAO implements IExerciseDAO {
      */
     private Map<Integer, StoredExercise> allExercises = new HashMap<>();
 
+    String apiKey = "Zjb4NjJyci1VO64rukJ3hQ==S68Hg2qrOqR1buRL";
+
     /**
      * Retrieve all exercises.
      *
@@ -40,10 +42,19 @@ public class ExerciseDAO implements IExerciseDAO {
 
         Retrofit retrofitInstance = RetrofitClient.getInstance();
         IExerciseRetrofitDAO exerciseRetrofitDAO = retrofitInstance.create(IExerciseRetrofitDAO.class);
-        String apiKey = "Zjb4NjJyci1VO64rukJ3hQ==S68Hg2qrOqR1buRL";
         Call<List<Exercise>> retrieveExercises = exerciseRetrofitDAO.getExercises(apiKey);
         Response<List<Exercise>> exercises = retrieveExercises.execute();
         return exercises.body();
+
+     }
+
+     public List<Exercise> findByName(String name) throws IOException {
+
+         Retrofit retrofitInstance = RetrofitClient.getInstance();
+         IExerciseRetrofitDAO exerciseRetrofitDAO = retrofitInstance.create(IExerciseRetrofitDAO.class);
+         Call<List<Exercise>> retrieveExercises = exerciseRetrofitDAO.getExercisesByName(apiKey, name);
+         Response<List<Exercise>> exercises = retrieveExercises.execute();
+         return exercises.body();
 
      }
 

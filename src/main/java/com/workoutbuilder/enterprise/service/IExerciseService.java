@@ -43,6 +43,15 @@ public interface IExerciseService {
     List<Exercise> findAll() throws IOException;
 
     /**
+     * Finds a list of exercises with a certain name
+     *
+     * @param name name of the exercises to be found
+     * @return list of exercises with a certain name
+     * @throws IOException
+     */
+    List<Exercise> findByName(String name) throws IOException;
+
+    /**
      * Find exercises by their type.
      *
      * @param type The type of the exercises to be found.

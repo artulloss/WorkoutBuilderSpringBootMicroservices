@@ -87,6 +87,17 @@ public class ExerciseService implements IExerciseService {
     }
 
     /**
+     * Retrieves a list of exercises associated with a name
+     *
+     * @param name name of the exercise
+     * @return list of exercise by name
+     * @throws IOException
+     */
+    public List<Exercise> findByName(String name) throws IOException {
+        return exerciseDAO.findByName(name);
+    }
+
+    /**
      * Retrieves all exercises associated with a specific workout.
      *
      * @param workoutId the ID of the workout
