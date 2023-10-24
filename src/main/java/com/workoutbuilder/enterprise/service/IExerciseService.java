@@ -1,8 +1,10 @@
 package com.workoutbuilder.enterprise.service;
 
+import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -38,7 +40,7 @@ public interface IExerciseService {
      *
      * @return A list of all exercises.
      */
-    List<StoredExercise> findAll();
+    List<Exercise> findAll() throws IOException;
 
     /**
      * Find exercises by their type.

@@ -1,8 +1,10 @@
 package com.workoutbuilder.enterprise.dao;
 
+import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,7 +17,7 @@ public interface IExerciseDAO {
      *
      * @return A list of all exercises.
      */
-    List<StoredExercise> findAll();
+    List<Exercise> findAll() throws IOException;
 
     /**
      * Find and return an exercise by its unique ID.

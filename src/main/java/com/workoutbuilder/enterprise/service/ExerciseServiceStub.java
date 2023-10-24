@@ -1,11 +1,13 @@
 package com.workoutbuilder.enterprise.service;
 
 import com.workoutbuilder.enterprise.dao.IExerciseDAO;
+import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -53,7 +55,7 @@ public class ExerciseServiceStub implements IExerciseService{
      * @return A list of all exercises.
      */
     @Override
-    public List<StoredExercise> findAll() {
+    public List<Exercise> findAll() throws IOException {
         return exerciseDAO.findAll();
     }
 

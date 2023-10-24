@@ -1,14 +1,18 @@
 package com.workoutbuilder.enterprise.controller;
 
+import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.service.IExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -27,10 +31,10 @@ public class WorkoutBuilderController {
      * @return name of the index view.
      */
     @GetMapping("/")
-    public String index(Model model) {
-        StoredExercise exercise = new StoredExercise();
+    public String index(Model model) throws IOException {
+        Exercise exercise = new Exercise();
         model.addAttribute("exercise", exercise);
-        List<StoredExercise> exercises = exerciseService.findAll();
+        List<Exercise> exercises = exerciseService.findAll();
         model.addAttribute("exercises", exercises);
         return "/index";
     }
@@ -42,8 +46,16 @@ public class WorkoutBuilderController {
      */
     @GetMapping("api/exercise")
     @ResponseBody
-    public List<StoredExercise> fetchAllExercises(){
-        return exerciseService.findAll();
+    public ResponseEntity fetchAllExercises(){
+        try {
+            List<Exercise> exercises = exerciseService.findAll();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity(exercises, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**

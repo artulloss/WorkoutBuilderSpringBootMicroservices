@@ -1,5 +1,6 @@
 package com.workoutbuilder.enterprise.dto;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
@@ -17,31 +18,37 @@ public class Exercise {
     /**
      * The name of the exercise (e.g., "Incline Hammer Curls").
      */
+    @SerializedName("name")
     private String name;
 
     /**
      * The categorization of the exercise, as defined in the {@link ExerciseType} enum.
      * This helps in grouping similar exercises (e.g., "strength").
      */
+    @SerializedName("type")
     private ExerciseType type;
 
     /**
      * The muscle group targeted by the exercise, represented using the {@link ExerciseMuscle} enum (e.g., "biceps").
      */
+    @SerializedName("muscle")
     private ExerciseMuscle muscle;
 
     /**
      * The equipment required for the exercise (e.g., "dumbbell").
      */
+    @SerializedName("equipment")
     private String equipment;
 
     /**
      * The difficulty level of the exercise, represented using the {@link ExerciseDifficulty} enum (e.g., "beginner").
      */
+    @SerializedName("difficulty")
     private ExerciseDifficulty difficulty;
 
     /**
      * A detailed description of the exercise, including instructions on how to perform it.
      */
+    @SerializedName("instructions")
     private String instructions;
 }

@@ -17,7 +17,7 @@ import java.io.IOException;
 public class RetrofitClient {
 
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://api.api-ninjas.com/api/";
+    private static final String BASE_URL = "https://api.api-ninjas.com/";
 
     /**
      * Provides the Retrofit object instance.

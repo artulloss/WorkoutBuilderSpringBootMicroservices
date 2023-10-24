@@ -1,5 +1,6 @@
 package com.workoutbuilder.enterprise.dao;
 
+import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,7 @@ public class ExerciseDAOStub implements IExerciseDAO{
      * @return A list of all exercises.
      */
     @Override
-    public List<StoredExercise> findAll()
+    public List<Exercise> findAll()
     {
         return new ArrayList<>(exercises.values());
     }

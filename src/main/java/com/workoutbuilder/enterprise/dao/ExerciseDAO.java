@@ -1,11 +1,16 @@
 package com.workoutbuilder.enterprise.dao;
 
+import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import com.workoutbuilder.enterprise.dto.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,9 +36,16 @@ public class ExerciseDAO implements IExerciseDAO {
      * @return A list of all exercises.
      */
     @Override
-    public List<StoredExercise> findAll() {
-        return new ArrayList<>(allExercises.values());
-    }
+    public List<Exercise> findAll() throws IOException {
+
+        Retrofit retrofitInstance = RetrofitClient.getInstance();
+        IExerciseRetrofitDAO exerciseRetrofitDAO = retrofitInstance.create(IExerciseRetrofitDAO.class);
+        String apiKey = "Zjb4NjJyci1VO64rukJ3hQ==S68Hg2qrOqR1buRL";
+        Call<List<Exercise>> retrieveExercises = exerciseRetrofitDAO.getExercises(apiKey);
+        Response<List<Exercise>> exercises = retrieveExercises.execute();
+        return exercises.body();
+
+     }
 
     /**
      * Find an exercise by its ID.
