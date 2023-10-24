@@ -5,6 +5,7 @@ import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import com.workoutbuilder.enterprise.dto.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -30,7 +31,7 @@ public class ExerciseDAO implements IExerciseDAO {
      */
     private Map<Integer, StoredExercise> allExercises = new HashMap<>();
 
-    String apiKey = "Zjb4NjJyci1VO64rukJ3hQ==S68Hg2qrOqR1buRL";
+    @Value("${api_key}") String apiKey;
 
     /**
      * Retrieve all exercises.
@@ -48,6 +49,12 @@ public class ExerciseDAO implements IExerciseDAO {
 
      }
 
+    /**
+     * finds a list of exercises by a certain name search query
+     * @param name the name of the exercise to be found
+     * @return a list of exercises by name
+     * @throws IOException
+     */
      public List<Exercise> findByName(String name) throws IOException {
 
          Retrofit retrofitInstance = RetrofitClient.getInstance();
