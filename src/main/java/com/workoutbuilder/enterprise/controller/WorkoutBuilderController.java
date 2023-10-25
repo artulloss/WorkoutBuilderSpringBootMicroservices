@@ -47,51 +47,50 @@ public class WorkoutBuilderController {
      */
     @GetMapping("api/exercise")
     @ResponseBody
-    public ResponseEntity fetchAllExercises(){
+    public ResponseEntity<List<Exercise>> fetchAllExercises(){
         try {
             List<Exercise> exercises = exerciseService.findAll();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            return new ResponseEntity(exercises, headers, HttpStatus.OK);
+            return new ResponseEntity<>(exercises, headers, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("api/searchExerciseAutocomplete")
-    public ResponseEntity searchExerciseAutocomplete(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
-        List<String> exerciseNames = new ArrayList<String>();
+    public ResponseEntity<List<String>> searchExerciseAutocomplete(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
+        List<String> exerciseNames = new ArrayList<>();
         try {
             List<Exercise> exercises = exerciseService.findByName(name);
+            if(exercises == null) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             for (Exercise exercise : exercises) {
                 exerciseNames.add(exercise.getName());
             }
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            return new ResponseEntity(exerciseNames, headers, HttpStatus.OK);
+            return new ResponseEntity<>(exerciseNames, headers, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("api/searchExercise")
-    public ResponseEntity searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
+    public ResponseEntity<List<Exercise>> searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
         try {
             List<Exercise> exercises = exerciseService.findByName(name);
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            return new ResponseEntity(exercises, headers, HttpStatus.OK);
+            return new ResponseEntity<>(exercises, headers, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
-
 
     /**
      * Fetches an exercise by its ID.
@@ -147,12 +146,12 @@ public class WorkoutBuilderController {
      * @return ResponseEntity with either HTTP OK status or HTTP Internal Server Error status.
      */
     @DeleteMapping("api/exercise/{id}")
-    public ResponseEntity deleteExercise(@PathVariable("id") int id) {
+    public ResponseEntity<Exercise> deleteExercise(@PathVariable("id") int id) {
         try{
             exerciseService.deleteExercise(id);
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

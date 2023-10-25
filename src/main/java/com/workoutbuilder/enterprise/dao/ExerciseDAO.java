@@ -26,12 +26,13 @@ public class ExerciseDAO implements IExerciseDAO {
     @Autowired
     private IWorkoutDAO workoutDAO;
 
+    @Autowired
+    private Retrofit retrofit;
+
     /**
      * Represents a storage for exercises using a Map with exercise id as key.
      */
-    private Map<Integer, StoredExercise> allExercises = new HashMap<>();
-
-    @Value("${api_key}") String apiKey;
+    private final Map<Integer, StoredExercise> allExercises = new HashMap<>();
 
     /**
      * Retrieve all exercises.
@@ -41,9 +42,8 @@ public class ExerciseDAO implements IExerciseDAO {
     @Override
     public List<Exercise> findAll() throws IOException {
 
-        Retrofit retrofitInstance = RetrofitClient.getInstance();
-        IExerciseRetrofitDAO exerciseRetrofitDAO = retrofitInstance.create(IExerciseRetrofitDAO.class);
-        Call<List<Exercise>> retrieveExercises = exerciseRetrofitDAO.getExercises(apiKey);
+        IExerciseRetrofitDAO exerciseRetrofitDAO = retrofit.create(IExerciseRetrofitDAO.class);
+        Call<List<Exercise>> retrieveExercises = exerciseRetrofitDAO.getExercises();
         Response<List<Exercise>> exercises = retrieveExercises.execute();
         return exercises.body();
 
@@ -53,13 +53,12 @@ public class ExerciseDAO implements IExerciseDAO {
      * finds a list of exercises by a certain name search query
      * @param name the name of the exercise to be found
      * @return a list of exercises by name
-     * @throws IOException
+     * @throws IOException if the call to the API fails
      */
      public List<Exercise> findByName(String name) throws IOException {
 
-         Retrofit retrofitInstance = RetrofitClient.getInstance();
-         IExerciseRetrofitDAO exerciseRetrofitDAO = retrofitInstance.create(IExerciseRetrofitDAO.class);
-         Call<List<Exercise>> retrieveExercises = exerciseRetrofitDAO.getExercisesByName(apiKey, name);
+         IExerciseRetrofitDAO exerciseRetrofitDAO = retrofit.create(IExerciseRetrofitDAO.class);
+         Call<List<Exercise>> retrieveExercises = exerciseRetrofitDAO.getExercisesByName(name);
          Response<List<Exercise>> exercises = retrieveExercises.execute();
          return exercises.body();
 

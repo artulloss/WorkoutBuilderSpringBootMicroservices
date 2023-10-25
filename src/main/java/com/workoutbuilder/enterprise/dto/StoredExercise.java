@@ -3,6 +3,7 @@ package com.workoutbuilder.enterprise.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Generated;
 
 /**
  * Represents an individual exercise that is linked to a workout.
@@ -19,6 +20,7 @@ public class StoredExercise extends Exercise {
     /**
      * The unique identifier for this exercise.
      */
+    @Generated
     private int id;
 
     private Integer sets = null;
