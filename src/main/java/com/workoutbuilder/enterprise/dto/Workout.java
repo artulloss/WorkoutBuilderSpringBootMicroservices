@@ -2,6 +2,7 @@ package com.workoutbuilder.enterprise.dto;
 
 import lombok.Data;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,9 +32,9 @@ public class Workout {
     private String description;
 
     /**
-     * Duration of the workout in minutes.
+     * The date when the workout took place
      */
-    private int duration;
+    private Date date;
 
 
     /**

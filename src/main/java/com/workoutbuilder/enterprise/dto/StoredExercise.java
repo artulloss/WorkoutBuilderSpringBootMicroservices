@@ -37,5 +37,4 @@ public class StoredExercise extends Exercise {
 
     private int duration;
 
-    private Date date;
 }

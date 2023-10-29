@@ -2,6 +2,7 @@ package com.workoutbuilder.enterprise.controller;
 
 import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.StoredExercise;
+import com.workoutbuilder.enterprise.dto.Workout;
 import com.workoutbuilder.enterprise.service.IExerciseService;
 import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,9 @@ public class WorkoutBuilderController {
     @GetMapping("/")
     public String index(Model model) throws IOException {
         StoredExercise storedExercise = new StoredExercise();
+        Workout workout = new Workout();
         model.addAttribute("storedExercise", storedExercise);
+        model.addAttribute("workout", workout);
         return "/index";
     }
 
