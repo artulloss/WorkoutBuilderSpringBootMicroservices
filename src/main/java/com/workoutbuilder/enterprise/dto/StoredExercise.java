@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Generated;
 
+import java.util.Date;
+
 /**
  * Represents an individual exercise that is linked to a workout.
  * This DTO extends the {@link Exercise} DTO and adds fields for sets, reps, weight, and duration.
@@ -23,6 +25,8 @@ public class StoredExercise extends Exercise {
     @Generated
     private int id;
 
+    private String exerciseName;
+
     private Integer sets = null;
 
     private Integer reps = null;
@@ -32,4 +36,6 @@ public class StoredExercise extends Exercise {
     private int workoutId;
 
     private int duration;
+
+    private Date date;
 }

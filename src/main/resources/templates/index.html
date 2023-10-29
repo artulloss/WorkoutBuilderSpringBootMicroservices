@@ -75,7 +75,7 @@
   <br><br><br>
 
   <Label>Workout Logger</Label>
-  <form action="#" th:action="@{/api/exercise}" th:object="${exercise}" method="GET">
+  <form action="#" th:action="@{/api/exercise}" th:object="${storedExercise}" method="GET">
     <div class="sm:col-span-4">
       <label for="exercises" class="block text-sm font-medium leading-6 text-gray-900">Exercise Name</label>
       <div class="mt-2">
