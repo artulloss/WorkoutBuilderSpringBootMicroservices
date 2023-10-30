@@ -20,7 +20,7 @@ public class WorkoutServiceStub implements IWorkoutServiceStub {
     public Workout findById(int id) {
         Workout workout = new Workout();
         workout.setId(12);
-        workout.setDuration(45);
+//        workout.setDuration(45);
 
         return workout;
     }

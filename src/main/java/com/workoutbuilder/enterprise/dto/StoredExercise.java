@@ -25,8 +25,6 @@ public class StoredExercise extends Exercise {
     @Generated
     private int id;
 
-    private String exerciseName;
-
     private Integer sets = null;
 
     private Integer reps = null;
