@@ -1,11 +1,8 @@
 package com.workoutbuilder.enterprise.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Generated;
-
-import java.util.Date;
+import jakarta.persistence.*;
+import lombok.*;
 
 /**
  * Represents an individual exercise that is linked to a workout.
@@ -15,15 +12,21 @@ import java.util.Date;
  * Business logic will be applied to require that cardio exercises have a duration, and
  * everything else has sets, reps, and optionally weight.
  */
-@Data
-@EqualsAndHashCode(callSuper = false) // Do not include superclass fields in equals() or hashCode()
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL) // Disregard null fields when serializing to JSON
+@Entity
 public class StoredExercise extends Exercise {
+
     /**
      * The unique identifier for this exercise.
      */
     @Generated
-    private int id;
+    @Id
+    @Column(nullable = false)
+    private long id;
 
     private Integer sets = null;
 

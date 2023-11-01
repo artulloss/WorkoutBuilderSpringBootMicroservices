@@ -1,6 +1,11 @@
 package com.workoutbuilder.enterprise.dto;
 
-import lombok.Data;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,13 +17,20 @@ import java.util.List;
  * completion dates, and the individual exercises that make up the workout.
  * </p>
  */
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Entity
 public class Workout {
 
     /**
      * The unique identifier for this workout.
      */
-    private int id;
+    @Generated
+    @Id
+    @Column(nullable = false)
+    private long id;
 
     /**
      * The name of the workout (e.g., "Full Body Strength Routine").
@@ -41,4 +53,17 @@ public class Workout {
      * A list of stored exercises that constitute this workout.
      */
     private List<StoredExercise> exercises = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Workout workout = (Workout) o;
+        return id == workout.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

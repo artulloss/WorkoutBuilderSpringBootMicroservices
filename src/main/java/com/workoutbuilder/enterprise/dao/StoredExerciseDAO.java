@@ -1,38 +1,30 @@
 package com.workoutbuilder.enterprise.dao;
 
-import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import com.workoutbuilder.enterprise.dto.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-import retrofit2.Call;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents the Data Access Object for Exercises.
  */
 @Repository
-public class ExerciseDAO implements IExerciseDAO {
+public class StoredExerciseDAO implements IStoredExerciseDAO {
+
+    @Autowired
+    private IStoredExerciseDAO storedExerciseDAO;
 
     @Autowired
     private IWorkoutDAO workoutDAO;
 
-    @Autowired
-    private Retrofit retrofit;
-
     /**
      * Represents a storage for exercises using a Map with exercise id as key.
      */
-    private final Map<Integer, StoredExercise> allExercises = new HashMap<>();
+    private final Map<Long, StoredExercise> allExercises = new HashMap<>();
 
     /**
      * Retrieve all exercises.
@@ -40,13 +32,8 @@ public class ExerciseDAO implements IExerciseDAO {
      * @return A list of all exercises.
      */
     @Override
-    public List<Exercise> findAll() throws IOException {
-
-        IExerciseRetrofitDAO exerciseRetrofitDAO = retrofit.create(IExerciseRetrofitDAO.class);
-        Call<List<Exercise>> retrieveExercises = exerciseRetrofitDAO.getExercises();
-        Response<List<Exercise>> exercises = retrieveExercises.execute();
-        return exercises.body();
-
+    public Iterable<StoredExercise> findAll() throws IOException {
+        return storedExerciseDAO.findAll();
     }
 
     /**
@@ -55,13 +42,9 @@ public class ExerciseDAO implements IExerciseDAO {
      * @return a list of exercises by name
      * @throws IOException if the call to the API fails
      */
-    public List<Exercise> findByName(String name) throws IOException {
-
-        IExerciseRetrofitDAO exerciseRetrofitDAO = retrofit.create(IExerciseRetrofitDAO.class);
-        Call<List<Exercise>> retrieveExercises = exerciseRetrofitDAO.getExercisesByName(name);
-        Response<List<Exercise>> exercises = retrieveExercises.execute();
-        return exercises.body();
-
+    @Override
+    public List<StoredExercise> findByName(String name) throws IOException {
+        return storedExerciseDAO.findByName(name);
     }
 
     /**
@@ -71,8 +54,8 @@ public class ExerciseDAO implements IExerciseDAO {
      * @return The exercise if found, otherwise null.
      */
     @Override
-    public StoredExercise findById(long id) {
-        return allExercises.get(id);
+    public Optional<StoredExercise> findById(long id) {
+        return storedExerciseDAO.findById(id);
     }
 
     /**
@@ -102,5 +85,27 @@ public class ExerciseDAO implements IExerciseDAO {
             }
         }
         return returnExercises;
+    }
+
+    /**
+     * Save or update the given exercise.
+     *
+     * @param exercise The exercise to be saved or updated.
+     * @return The saved or updated exercise.
+     */
+    @Override
+    public StoredExercise saveStoredExercise(StoredExercise exercise) {
+        allExercises.put(exercise.getId(), exercise);
+        return exercise;
+    }
+
+    /**
+     * Delete an exercise by its ID.
+     *
+     * @param id The ID of the exercise to delete.
+     */
+    @Override
+    public void deleteExercise(long id) {
+        allExercises.remove(id);
     }
 }

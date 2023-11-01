@@ -4,7 +4,7 @@ import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.Workout;
 import com.workoutbuilder.enterprise.service.IExerciseService;
-import org.apache.catalina.Store;
+import com.workoutbuilder.enterprise.service.IStoredExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Controller class responsible for handling requests related to workouts and exercises.
@@ -26,6 +27,9 @@ public class WorkoutBuilderController {
 
     @Autowired
     IExerciseService exerciseService;
+
+    @Autowired
+    IStoredExerciseService storedExerciseService;
 
     /**
      * Maps the root URL ("/") to the index page.
@@ -102,8 +106,8 @@ public class WorkoutBuilderController {
      */
     @GetMapping("api/exercise/{id}")
     @ResponseBody
-    public StoredExercise fetchExerciseById(@PathVariable("id") int id){
-        return exerciseService.findById(id);
+    public Optional<StoredExercise> fetchExerciseById(@PathVariable("id") int id){
+        return storedExerciseService.findById(id);
     }
 
     /**
@@ -117,28 +121,11 @@ public class WorkoutBuilderController {
     public StoredExercise createExercise(@RequestBody StoredExercise exercise) {
         StoredExercise newExercise = null;
         try {
-            newExercise = exerciseService.saveExercise(exercise);
+            newExercise = storedExerciseService.saveStoredExercise(exercise);
         } catch (Exception e) {
             //TODO LOG ERROR
         }
         return newExercise;
-    }
-
-    /**
-     * Saves an exercise.
-     *
-     * @param exercise Exercise object to be saved.
-     * @return Redirection to the index page.
-     */
-    @RequestMapping("api/saveExercise")
-    public String saveExercise(StoredExercise exercise) {
-        try {
-            exerciseService.saveExercise(exercise);
-        } catch (Exception e) {
-            //TODO LOG ERROR
-            return "/index";
-        }
-        return "/index";
     }
 
     /**
@@ -150,7 +137,7 @@ public class WorkoutBuilderController {
     @DeleteMapping("api/exercise/{id}")
     public ResponseEntity<Exercise> deleteExercise(@PathVariable("id") int id) {
         try{
-            exerciseService.deleteExercise(id);
+            storedExerciseService.deleteStoredExercise(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

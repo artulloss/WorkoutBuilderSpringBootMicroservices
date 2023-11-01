@@ -2,7 +2,6 @@ package com.workoutbuilder.enterprise.service;
 
 import com.workoutbuilder.enterprise.dao.IExerciseDAO;
 import com.workoutbuilder.enterprise.dto.Exercise;
-import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.ExerciseType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,28 +15,6 @@ public class ExerciseServiceStub implements IExerciseService{
     @Autowired
     IExerciseDAO exerciseDAO;
 
-
-    /**
-     * Save an exercise.
-     *
-     * @param exercise The exercise to be saved or updated.
-     * @return The saved or updated exercise.
-     */
-    @Override
-    public StoredExercise saveExercise(StoredExercise exercise) throws Exception {
-        return exerciseDAO.saveExercise(exercise);
-    }
-
-    /**
-     * Delete an exercise.
-     *
-     * @param id The id of the exercise to be deleted.
-     */
-    @Override
-    public void deleteExercise(int id) throws Exception {
-        exerciseDAO.deleteExercise(id);
-    }
-
     /**
      * Find an exercise by its ID.
      *
@@ -45,7 +22,7 @@ public class ExerciseServiceStub implements IExerciseService{
      * @return The exercise with the given ID.
      */
     @Override
-    public StoredExercise findById(int id) {
+    public Exercise findById(int id) {
         return exerciseDAO.findById(id);
     }
 
@@ -78,7 +55,7 @@ public class ExerciseServiceStub implements IExerciseService{
      * @return A list of exercises with the given type.
      */
     @Override
-    public List<StoredExercise> findByExerciseType(ExerciseType type) {
+    public List<Exercise> findByExerciseType(ExerciseType type) {
         return null;
     }
 
@@ -89,7 +66,7 @@ public class ExerciseServiceStub implements IExerciseService{
      * @return A list of exercises with the given workout ID.
      */
     @Override
-    public List<StoredExercise> findExercisesByWorkoutId(int workoutId) {
+    public List<Exercise> findExercisesByWorkoutId(long workoutId) {
         return null;
     }
 }

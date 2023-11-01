@@ -11,7 +11,7 @@ public interface IWorkoutDAO {
      * @param id The ID of the workout to be found.
      * @return The workout with the given ID, or null if not found.
      */
-    Workout findById(int id);
+    Workout findById(long id);
 
     /**
      * Find all workouts.
@@ -32,5 +32,5 @@ public interface IWorkoutDAO {
      *
      * @param id The workout to be deleted.
      */
-    void deleteWorkout(int id);
+    void deleteWorkout(long id);
 }

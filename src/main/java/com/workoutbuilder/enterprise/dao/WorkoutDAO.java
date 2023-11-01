@@ -17,7 +17,7 @@ public class WorkoutDAO implements IWorkoutDAO {
     /**
      * Represents a storage for workouts using a Map with workout id as key.
      */
-    private Map<Integer, Workout> allWorkouts = new HashMap<>();
+    final private Map<Long, Workout> allWorkouts = new HashMap<>();
 
     /**
      * Find a workout by its ID.
@@ -26,7 +26,7 @@ public class WorkoutDAO implements IWorkoutDAO {
      * @return The workout if found, otherwise null.
      */
     @Override
-    public Workout findById(int id) {
+    public Workout findById(long id) {
         return allWorkouts.get(id);
     }
 
@@ -58,7 +58,7 @@ public class WorkoutDAO implements IWorkoutDAO {
      * @param id The ID of the workout to delete.
      */
     @Override
-    public void deleteWorkout(int id) {
+    public void deleteWorkout(long id) {
         allWorkouts.remove(id);
     }
 }
