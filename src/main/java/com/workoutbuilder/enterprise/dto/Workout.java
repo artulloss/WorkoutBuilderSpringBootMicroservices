@@ -1,9 +1,6 @@
 package com.workoutbuilder.enterprise.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -28,7 +25,7 @@ public class Workout {
     /**
      * The unique identifier for this workout.
      */
-    @Generated
+    @GeneratedValue
     @Id
     @Column(nullable = false)
     private long id;

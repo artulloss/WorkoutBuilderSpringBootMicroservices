@@ -23,7 +23,7 @@ public class StoredExercise extends Exercise {
     /**
      * The unique identifier for this exercise.
      */
-    @Generated
+    @GeneratedValue
     @Id
     @Column(nullable = false)
     private long id;
