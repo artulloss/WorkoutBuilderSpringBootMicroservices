@@ -3,6 +3,7 @@ package com.workoutbuilder.enterprise.dto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -52,6 +53,8 @@ public class Workout {
     /**
      * A list of stored exercises that constitute this workout.
      */
+    @OneToMany(mappedBy = "workout")
+    @ToString.Exclude
     private List<StoredExercise> exercises = new ArrayList<>();
 
     @Override

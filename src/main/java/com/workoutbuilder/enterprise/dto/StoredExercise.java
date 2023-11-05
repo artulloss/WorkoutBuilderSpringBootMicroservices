@@ -34,7 +34,9 @@ public class StoredExercise extends Exercise {
 
     private Integer weight = null;
 
-    private int workoutId;
+    @ManyToOne
+    @JoinColumn(name = "workout_id")
+    private Workout workout;
 
     private int duration;
 
