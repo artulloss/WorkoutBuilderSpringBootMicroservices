@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("StoredExerciseDAO")
+@Repository
 public class StoredExerciseSQLDAO implements IStoredExerciseDAO {
 
     @Autowired
@@ -37,8 +37,8 @@ public class StoredExerciseSQLDAO implements IStoredExerciseDAO {
     }
 
     @Override
-    public List<StoredExercise> findByExerciseType(ExerciseType type) {
-        return storedExerciseRepository.findByExerciseType(type);
+    public List<StoredExercise> findByType(ExerciseType type) {
+        return storedExerciseRepository.findByType(type);
     }
 
     @Override

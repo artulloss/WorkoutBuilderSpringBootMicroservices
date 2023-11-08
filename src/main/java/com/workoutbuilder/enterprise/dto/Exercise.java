@@ -1,7 +1,11 @@
 package com.workoutbuilder.enterprise.dto;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.Data;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.MappedSuperclass;
+import lombok.*;
 
 /**
  * Represents an individual exercise that is brought in from an external API.
@@ -12,7 +16,11 @@ import lombok.Data;
  * Various enums represent different muscles, types, and difficulty levels.
  * {@link ExerciseMuscle}, {@link ExerciseType}, and {@link ExerciseDifficulty}
  */
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@MappedSuperclass
 public class Exercise {
 
     /**
@@ -26,6 +34,8 @@ public class Exercise {
      * This helps in grouping similar exercises (e.g., "strength").
      */
     @SerializedName("type")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
     private ExerciseType type;
 
     /**

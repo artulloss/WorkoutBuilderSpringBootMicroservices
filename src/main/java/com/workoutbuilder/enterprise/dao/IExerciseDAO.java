@@ -43,5 +43,5 @@ public interface IExerciseDAO {
      * @param type The type of exercises to retrieve.
      * @return A list of exercises of the specified type.
      */
-    List<StoredExercise> findByExerciseType(ExerciseType type);
+    List<StoredExercise> findByType(ExerciseType type);
 }

@@ -9,5 +9,5 @@ import java.util.List;
 public interface StoredExerciseRepository extends CrudRepository<StoredExercise, Long> {
 
     List<StoredExercise> findByName(String name);
-    List<StoredExercise> findByExerciseType(ExerciseType type);
+    List<StoredExercise> findByType(ExerciseType type);
 }

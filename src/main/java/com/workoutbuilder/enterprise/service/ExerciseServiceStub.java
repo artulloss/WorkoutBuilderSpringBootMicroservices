@@ -55,7 +55,7 @@ public class ExerciseServiceStub implements IExerciseService{
      * @return A list of exercises with the given type.
      */
     @Override
-    public List<Exercise> findByExerciseType(ExerciseType type) {
+    public List<Exercise> findByType(ExerciseType type) {
         return null;
     }
 

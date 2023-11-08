@@ -111,7 +111,7 @@ public class StoredExerciseService implements IStoredExerciseService {
      * @param type the type/category of the exercise
      * @return a list of exercises that match the specified type
      */
-    public List<StoredExercise> findByExerciseType(ExerciseType type) {
-        return storedExerciseDAO.findByExerciseType(type);
+    public List<StoredExercise> findByType(ExerciseType type) {
+        return storedExerciseDAO.findByType(type);
     }
 }

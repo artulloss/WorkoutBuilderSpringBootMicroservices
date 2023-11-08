@@ -77,7 +77,7 @@ public class StoredExerciseDAO implements IStoredExerciseDAO {
      * @return A list of exercises of the specified type.
      */
     @Override
-    public List<StoredExercise> findByExerciseType(ExerciseType type) {
+    public List<StoredExercise> findByType(ExerciseType type) {
         List<StoredExercise> returnExercises = new ArrayList<>();
         for (StoredExercise exercise : allExercises.values()) {
             if (exercise.getType().equals(type)) {

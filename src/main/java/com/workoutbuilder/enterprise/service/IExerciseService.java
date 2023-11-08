@@ -41,7 +41,7 @@ public interface IExerciseService {
      * @param type The type of the exercises to be found.
      * @return A list of exercises with the given type.
      */
-    List<Exercise> findByExerciseType(ExerciseType type);
+    List<Exercise> findByType(ExerciseType type);
 
     /**
      * Find exercises by a workout ID.
