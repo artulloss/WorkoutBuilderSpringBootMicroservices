@@ -66,19 +66,15 @@ public class WorkoutBuilderController {
     }
 
     @GetMapping("api/searchExerciseAutocomplete")
-    public ResponseEntity<List<String>> searchExerciseAutocomplete(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
-        List<String> exerciseNames = new ArrayList<>();
+    public ResponseEntity<List<Exercise>> searchExerciseAutocomplete(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
         try {
             List<Exercise> exercises = exerciseService.findByName(name);
             if(exercises == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-            for (Exercise exercise : exercises) {
-                exerciseNames.add(exercise.getName());
-            }
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            return new ResponseEntity<>(exerciseNames, headers, HttpStatus.OK);
+            return new ResponseEntity<>(exercises, headers, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

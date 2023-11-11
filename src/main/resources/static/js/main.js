@@ -39,7 +39,7 @@ jQuery(($) => {
                 let results = [];
                 let id = 0;
                 data.forEach((d) => {
-                  results.push({ id: id, text: d })
+                  results.push({ id: id, text: d.name })
                   id++;
                 })
                 return {
