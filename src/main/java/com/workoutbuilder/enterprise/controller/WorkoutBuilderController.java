@@ -71,7 +71,7 @@ public class WorkoutBuilderController {
         try {
             List<Exercise> exercises = exerciseService.findByName(name);
             if(exercises == null) {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
             for (Exercise exercise : exercises) {
                 exerciseNames.add(exercise.getName());

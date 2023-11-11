@@ -45,7 +45,7 @@ public class ExerciseServiceStub implements IExerciseService{
      */
     @Override
     public List<Exercise> findByName(String name) throws IOException {
-        return null;
+        return exerciseDAO.findByName(name);
     }
 
     /**

@@ -56,12 +56,10 @@ public class ExerciseDAO implements IExerciseDAO {
      * @throws IOException if the call to the API fails
      */
     public List<Exercise> findByName(String name) throws IOException {
-
         IExerciseRetrofitDAO exerciseRetrofitDAO = retrofit.create(IExerciseRetrofitDAO.class);
         Call<List<Exercise>> retrieveExercises = exerciseRetrofitDAO.getExercisesByName(name);
         Response<List<Exercise>> exercises = retrieveExercises.execute();
         return exercises.body();
-
     }
 
     /**
