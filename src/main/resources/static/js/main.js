@@ -58,10 +58,11 @@ jQuery(($) => {
 
     // Function to update required fields based on exercise type
     const updateRequiredFields = (selectElement) => {
+        debugger;
         const selectedExercise = JSON.parse(selectElement.value);
         console.log({selectedExercise});
 
-        const isCardio = selectedExercise.type === 'cardio'; // Check if selected exercise is cardio
+        const isCardio = selectedExercise.type.toLowerCase() === 'cardio'; // Check if selected exercise is cardio
         const exerciseContainer = $(selectElement).closest('.exercise');
 
         exerciseContainer.find('#exerciseSets').prop('required', !isCardio);

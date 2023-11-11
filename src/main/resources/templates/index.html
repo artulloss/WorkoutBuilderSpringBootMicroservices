@@ -29,12 +29,7 @@
     </div>
     <div class="flex items-center">
     </div>
-    <!--<div class="sm:col-span-4">
-      <label for="exercises" class="block text-sm font-medium leading-6 text-gray-900">Exercise Name</label>
-      <div class="mt-2">
-        <select  id="exercises" name="exercises" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"></select>
-      </div>
-    </div> -->
+
     <br>
     <button type="submit" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Create Workout</button>
   </form>
@@ -43,36 +38,36 @@
   <Label>Workout Logger</Label>
   <form id="logWorkout" action="#" th:action="@{/api/exercise}" th:object="${storedExercise}" method="GET">
     <template id="exerciseFields">
-      <div class="exercise">
-        <div class="sm:col-span-4">
-          <label for="exercises" class="block text-sm font-medium leading-6 text-gray-900">Exercise Name</label>
-          <div class="mt-2">
-            <select id="exercises" name="exercises" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"></select>
-          </div>
+      <div class="exercise space-y-4">
+        <div class="form-control w-full max-w-xs">
+          <select id="exercises" name="exercises" class="order-2 input input-bordered w-full"></select>
+          <label class="label order-1">
+            <span class="label-text">Exercise Name</span>
+          </label>
         </div>
-        <div class="flex items-center">
-          <label for="exerciseSets" class="block text-sm font-medium leading-6 text-gray-900">Sets</label>
-          <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md ml-2">
-            <input type="number" name="sets" id="exerciseSets" min="0" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Sets">
-          </div>
+        <div class="form-control w-full max-w-xs">
+          <input type="number" name="sets" id="exerciseSets" min="0" placeholder="Sets" class="order-2 input input-bordered w-full">
+          <label class="label order-1">
+            <span class="label-text">Sets</span>
+          </label>
         </div>
-        <div class="flex items-center">
-          <label for="exerciseReps" class="block text-sm font-medium leading-6 text-gray-900">Reps</label>
-          <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md ml-2">
-            <input type="number" name="reps" id="exerciseReps" min="0" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Reps">
-          </div>
+        <div class="form-control w-full max-w-xs">
+          <input type="number" name="reps" id="exerciseReps" min="0" placeholder="Reps" class="order-2 input input-bordered w-full">
+          <label class="label order-1">
+            <span class="label-text">Reps</span>
+          </label>
         </div>
-        <div class="flex items-center">
-          <label for="exerciseWeight" class="block text-sm font-medium leading-6 text-gray-900">Weight (kg)</label>
-          <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md ml-2">
-            <input type="number" name="weight" id="exerciseWeight" min="0" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Weight">
-          </div>
+        <div class="form-control w-full max-w-xs">
+          <input type="number" name="weight" id="exerciseWeight" min="0" placeholder="Weight" class="order-2 input input-bordered w-full">
+          <label class="label order-1">
+            <span class="label-text">Weight (kg)</span>
+          </label>
         </div>
-        <div class="flex items-center">
-          <label for="exerciseDuration" class="block text-sm font-medium leading-6 text-gray-900">Duration (minutes)</label>
-          <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md ml-2">
-            <input type="number" name="duration" id="exerciseDuration" required min="0" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Duration">
-          </div>
+        <div class="form-control w-full max-w-xs">
+          <input type="number" name="duration" id="exerciseDuration" required min="0" placeholder="Duration" class="order-2 input input-bordered w-full">
+          <label class="label order-1">
+            <span class="label-text">Duration (minutes)</span>
+          </label>
         </div>
       </div>
     </template>
@@ -87,7 +82,13 @@
     <button id="addExercise" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Add Exercise</button>
     <button type="submit" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Log Workout</button>
   </form>
-
+  <style>
+    input[required] + label > span::after {
+        position: relative;
+        content: "*";
+        left: 2px;
+    }
+  </style>
 </main>
 </body>
 </html>
