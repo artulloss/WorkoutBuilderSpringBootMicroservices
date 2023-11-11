@@ -1,6 +1,8 @@
-package com.workoutbuilder.enterprise.dao;
+package com.workoutbuilder.enterprise.config;
 
+import com.google.gson.Gson;
 import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     private static final String BASE_URL = "https://api.api-ninjas.com/";
+
+
+    @Autowired
+    private Gson gson;
 
     @Value("${api-ninjas.api-key}")
     private String key;
@@ -31,7 +37,7 @@ public class RetrofitClient {
         return new retrofit2.Retrofit.Builder()
                 .client(client)
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
     }
 }
