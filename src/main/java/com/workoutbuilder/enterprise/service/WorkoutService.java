@@ -4,6 +4,8 @@ import com.workoutbuilder.enterprise.dao.IWorkoutDAO;
 import com.workoutbuilder.enterprise.dao.WorkoutDAO;
 import com.workoutbuilder.enterprise.dto.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,6 +52,7 @@ public class WorkoutService implements IWorkoutService {
      * @param id the ID of the workout to be deleted
      */
     @Override
+    @CacheEvict(value="workout", key="#id")
     public void deleteWorkout(int id) {
         workoutDAO.deleteWorkout(id);
     }
@@ -61,16 +64,18 @@ public class WorkoutService implements IWorkoutService {
      * @return the workout matching the provided ID
      */
     @Override
+    @Cacheable(value="workout", key="#id")
     public Workout findById(int id) {
         return workoutDAO.findById(id);
     }
 
-    /**
+    /**s
      * Retrieves all workouts.
      *
      * @return a list of all workouts
      */
     @Override
+    @Cacheable(value="workouts")
     public List<Workout> findAll() {
         return workoutDAO.findAll();
     }
