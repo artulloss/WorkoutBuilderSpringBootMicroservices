@@ -110,11 +110,17 @@ jQuery(($) => {
 
       console.log({ exercises });
 
+
+
       // Create JSON object
       const workoutData = {
         date: workoutDate,
-        name: "TODO: NAME",
-        description: "TODO: DESCRIPTION",
+        name: String(
+            document.querySelector('input[name="workoutName"]').value
+        ),
+        description: String(
+            document.querySelector('textarea[name="workoutDescription"]').value
+        ),
         exercises: exercises,
       };
 

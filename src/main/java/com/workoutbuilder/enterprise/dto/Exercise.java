@@ -60,5 +60,6 @@ public class Exercise {
      * A detailed description of the exercise, including instructions on how to perform it.
      */
     @SerializedName("instructions")
+    @Column(length=1500)
     private String instructions;
 }
