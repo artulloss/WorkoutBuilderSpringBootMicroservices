@@ -5,6 +5,7 @@ import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.Workout;
 import com.workoutbuilder.enterprise.service.IExerciseService;
 import com.workoutbuilder.enterprise.service.IStoredExerciseService;
+import com.workoutbuilder.enterprise.service.IWorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,9 @@ public class WorkoutBuilderController {
 
     @Autowired
     IStoredExerciseService storedExerciseService;
+
+    @Autowired
+    IWorkoutService workoutService;
 
     /**
      * Maps the root URL ("/") to the index page.
@@ -104,6 +108,27 @@ public class WorkoutBuilderController {
     @ResponseBody
     public Optional<StoredExercise> fetchExerciseById(@PathVariable("id") int id){
         return storedExerciseService.findById(id);
+    }
+
+    /**
+     * Logs a new workout
+     */
+    @PostMapping(value = "api/workout", consumes = "application/json", produces = "application/json")
+    @ResponseBody
+    public Workout logWorkout(@RequestBody Workout workout) {
+        // Save workout first (without exercises)
+        workout = workoutService.saveWorkout(workout);
+
+        List<StoredExercise> savedExercises = new ArrayList<>();
+        for (StoredExercise exercise : workout.getExercises()) {
+            exercise.setWorkout(workout);
+            StoredExercise savedExercise = storedExerciseService.saveStoredExercise(exercise);
+            savedExercises.add(savedExercise);
+        }
+
+        // Add saved exercises to the workout and update it
+        workout.setExercises(savedExercises);
+        return workoutService.saveWorkout(workout);
     }
 
     /**

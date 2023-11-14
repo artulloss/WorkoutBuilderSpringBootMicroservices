@@ -1,12 +1,11 @@
 package com.workoutbuilder.enterprise.dao;
 
 import com.workoutbuilder.enterprise.dto.Workout;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Represents the Data Access Object for Workouts.
@@ -14,10 +13,8 @@ import java.util.Map;
 @Repository
 public class WorkoutDAO implements IWorkoutDAO {
 
-    /**
-     * Represents a storage for workouts using a Map with workout id as key.
-     */
-    final private Map<Long, Workout> allWorkouts = new HashMap<>();
+    @Autowired
+    private WorkoutRepository workoutRepository;
 
     /**
      * Find a workout by its ID.
@@ -27,7 +24,7 @@ public class WorkoutDAO implements IWorkoutDAO {
      */
     @Override
     public Workout findById(long id) {
-        return allWorkouts.get(id);
+        return workoutRepository.findById(id).orElse(null);
     }
 
     /**
@@ -37,7 +34,9 @@ public class WorkoutDAO implements IWorkoutDAO {
      */
     @Override
     public List<Workout> findAll() {
-        return new ArrayList<>(allWorkouts.values());
+        List<Workout> workouts = new ArrayList<>();
+        workoutRepository.findAll().forEach(workouts::add);
+        return workouts;
     }
 
     /**
@@ -48,7 +47,7 @@ public class WorkoutDAO implements IWorkoutDAO {
      */
     @Override
     public Workout saveWorkout(Workout workout) {
-        allWorkouts.put(workout.getId(), workout);
+        workoutRepository.save(workout);
         return workout;
     }
 
@@ -59,6 +58,6 @@ public class WorkoutDAO implements IWorkoutDAO {
      */
     @Override
     public void deleteWorkout(long id) {
-        allWorkouts.remove(id);
+        workoutRepository.deleteById(id);
     }
 }

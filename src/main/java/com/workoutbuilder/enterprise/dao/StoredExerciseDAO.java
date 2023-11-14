@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * Represents the Data Access Object for Exercises.
  */
-@Repository
+//@Repository
 public class StoredExerciseDAO implements IStoredExerciseDAO {
 
     @Autowired

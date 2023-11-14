@@ -1,5 +1,6 @@
 package com.workoutbuilder.enterprise.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,6 +37,7 @@ public class StoredExercise extends Exercise {
 
     @ManyToOne
     @JoinColumn(name = "workout_id")
+    @JsonIgnore
     private Workout workout;
 
     private int duration;
