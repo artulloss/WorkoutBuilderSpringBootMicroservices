@@ -18,7 +18,7 @@
 <body>
 <div th:replace="fragments/topnav :: navbar"></div>
 <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
+  <br><br>
 
   <Label>Generate New Workout</Label>
   <form id="logWorkout" action="#" method="POST" class="space-y-4">
@@ -37,36 +37,45 @@
       </div>
     </div>
     <template id="exerciseFields">
+      <br>
+      <hr class="mb-4 border-gray-600">
+      <br>
       <div class="exercise space-y-4">
         <div class="form-control w-full max-w-xs">
+          <div>
+            <label class="label order-1" for="exercises">
+              <span class="label-text">Exercise Name</span>
+            </label>
+          </div>
           <select id="exercises" name="exercises" class="order-2 input input-bordered w-full"></select>
-          <label class="label order-1">
-            <span class="label-text">Exercise Name</span>
-          </label>
         </div>
-        <div class="form-control w-full max-w-xs">
-          <input type="number" name="sets" id="exerciseSets" min="0" placeholder="Sets" class="order-2 input input-bordered w-full">
-          <label class="label order-1">
-            <span class="label-text">Sets</span>
-          </label>
+        <div class="flex flex-row space-x-4">
+          <div class="form-control w-full max-w-xs mr-2">
+            <input type="number" name="sets" id="exerciseSets" min="0" placeholder="Sets" class="order-2 input input-bordered w-full">
+            <label class="label order-1" for="exerciseSets">
+              <span class="label-text">Sets</span>
+            </label>
+          </div>
+          <div class="form-control w-full max-w-xs">
+            <input type="number" name="reps" id="exerciseReps" min="0" placeholder="Reps" class="order-2 input input-bordered w-full">
+            <label class="label order-1" for="exerciseReps">
+              <span class="label-text">Reps</span>
+            </label>
+          </div>
         </div>
-        <div class="form-control w-full max-w-xs">
-          <input type="number" name="reps" id="exerciseReps" min="0" placeholder="Reps" class="order-2 input input-bordered w-full">
-          <label class="label order-1">
-            <span class="label-text">Reps</span>
-          </label>
-        </div>
-        <div class="form-control w-full max-w-xs">
-          <input type="number" name="weight" id="exerciseWeight" min="0" placeholder="Weight" class="order-2 input input-bordered w-full">
-          <label class="label order-1">
-            <span class="label-text">Weight (kg)</span>
-          </label>
-        </div>
-        <div class="form-control w-full max-w-xs">
-          <input type="number" name="duration" id="exerciseDuration" required min="0" placeholder="Duration" class="order-2 input input-bordered w-full">
-          <label class="label order-1">
-            <span class="label-text">Duration (minutes)</span>
-          </label>
+        <div class="flex flex-row gap-2">
+          <div class="flex form-control w-full max-w-xs mr-2">
+            <input type="number" name="weight" id="exerciseWeight" min="0" placeholder="Weight" class="order-2 input input-bordered w-full">
+            <label class="label order-1" for="exerciseWeight">
+              <span class="label-text">Weight (kg)</span>
+            </label>
+          </div>
+          <div class="flex form-control w-full max-w-xs">
+            <input type="number" name="duration" id="exerciseDuration" required min="0" placeholder="Duration" class="order-2 input input-bordered w-full">
+            <label class="label order-1" for="exerciseDuration">
+              <span class="label-text">Duration (minutes)</span>
+            </label>
+          </div>
         </div>
       </div>
     </template>
