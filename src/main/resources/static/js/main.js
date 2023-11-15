@@ -1,3 +1,5 @@
+import { toast } from "./toast.js";
+
 jQuery(($) => {
   const qs = document.querySelector.bind(document);
 
@@ -133,13 +135,12 @@ jQuery(($) => {
         body: JSON.stringify(workoutData),
       })
         .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-          // Handle success (e.g., show a success message, redirect, etc.)
+        .then(async () => {
+          await toast.success("Workout logged successfully!", 2000);
         })
-        .catch((error) => {
+        .catch(async (error) => {
           console.error("Error:", error);
-          // Handle errors here (e.g., show error message)
+          await toast.error("Error logging workout!", 2000);
         });
     });
   };
@@ -147,3 +148,4 @@ jQuery(($) => {
   addExercise();
   logWorkoutForm();
 });
+

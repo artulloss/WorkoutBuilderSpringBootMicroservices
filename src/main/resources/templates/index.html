@@ -5,7 +5,8 @@
   <title>Workout Builder — Dashboard</title>
   <link rel="stylesheet" th:href="@{/css/application.dist.css}">
   <script src="//unpkg.com/alpinejs" defer></script>
-  <script th:src="@{/js/main.js}" defer></script>
+  <script type="module" th:src="@{/js/main.js}" defer></script>
+  <script type="module" th:src="@{/js/toast.js}" defer></script>
 
   <script src="https://code.jquery.com/jquery-1.12.1.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -92,7 +93,24 @@
     <button id="addExercise" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Add Exercise</button>
     <button type="submit" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Log Workout</button>
   </form>
+
+  <!-- By embedding this as markup, Tailwind recognizes the classes -->
+  <template id="toastTemplate">
+    <div class="alert">
+      <span>{message}</span>
+    </div>
+  </template>
+  <template id="alertTypes">
+    <div class="alert-info"></div>
+    <div class="alert-success"></div>
+    <div class="alert-warning"></div>
+    <div class="alert-error"></div>
+  </template>
+  <div id="toast" class="toast">
+  </div>
+
   <style>
+    /* This makes required fields get an asterisk */
     input[required] + label > span::after {
         position: relative;
         content: "*";
