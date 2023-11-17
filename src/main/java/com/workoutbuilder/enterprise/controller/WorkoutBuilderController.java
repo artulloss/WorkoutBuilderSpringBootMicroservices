@@ -1,5 +1,6 @@
 package com.workoutbuilder.enterprise.controller;
 
+import com.workoutbuilder.enterprise.dto.CalendarWorkout;
 import com.workoutbuilder.enterprise.dto.Exercise;
 import com.workoutbuilder.enterprise.dto.StoredExercise;
 import com.workoutbuilder.enterprise.dto.Workout;
@@ -7,6 +8,7 @@ import com.workoutbuilder.enterprise.service.IExerciseService;
 import com.workoutbuilder.enterprise.service.IStoredExerciseService;
 import com.workoutbuilder.enterprise.service.IWorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +18,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,6 +118,47 @@ public class WorkoutBuilderController {
     }
 
     /**
+     * Gets workouts for a given date range.
+     * For use with FullCalendar.
+     * @link <a href="https://fullcalendar.io/docs/events-json-feed">Fullcalendar JSON feed</a>
+     * @return List of workout dates and IDs.
+     */
+    @GetMapping("api/workout")
+    @ResponseBody
+    public ResponseEntity<List<CalendarWorkout>> fetchWorkouts(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+
+        List<Workout> workouts = workoutService.findAll();
+
+        var calendarWorkouts = new ArrayList<CalendarWorkout>();
+
+        for (var workout : workouts) {
+            // Convert java.util.Date to LocalDateTime
+            LocalDateTime workoutDate = workout.getDate().toInstant()
+                    .atZone(ZoneId.ofOffset("UTC", ZoneOffset.UTC))
+                    .toLocalDateTime();
+
+            // Check if workout date is within the specified range
+            if ((start == null || !workoutDate.isBefore(start)) && (end == null || !workoutDate.isAfter(end))) {
+                var calendarWorkout = new CalendarWorkout();
+                calendarWorkout.setTitle(workout.getName());
+                calendarWorkout.setStart(workoutDate.format(DateTimeFormatter.ISO_DATE_TIME));
+
+                // Add one hour to the end time
+                LocalDateTime endWorkoutDate = workoutDate.plusHours(1);
+                calendarWorkout.setEnd(endWorkoutDate.toString());
+
+                calendarWorkouts.add(calendarWorkout);
+            }
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(calendarWorkouts, headers, HttpStatus.OK);
+    }
+
+    /**
      * Logs a new workout
      */
     @PostMapping(value = "api/workout", consumes = "application/json", produces = "application/json")
@@ -164,4 +212,5 @@ public class WorkoutBuilderController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }
