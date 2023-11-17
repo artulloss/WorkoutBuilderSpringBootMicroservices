@@ -57,6 +57,11 @@ public class WorkoutBuilderController {
         return "/index";
     }
 
+    @GetMapping("/calendar")
+    public String calendar(Model model) throws IOException {
+        return "/calendar";
+    }
+
     /**
      * Retrieves a list of all exercises.
      *
