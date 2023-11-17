@@ -13,7 +13,7 @@ export const toast = {
     },
     _generic: async function (message, type, timeout) {
       // Get the toast container element
-      const toast = document.getElementById("toast");
+      const toast = document.getElementById("toast") || this._createToastContainer();
       const alert = document.createElement("div");
       alert.classList.add("alert");
       alert.classList.add(`alert-${type}`);
@@ -22,6 +22,13 @@ export const toast = {
       // Wait for the specified timeout then remove the toast
       await new Promise((resolve) => setTimeout(resolve, timeout));
       alert.remove();
+    },
+    _createToastContainer: function () {
+      const toast = document.createElement("div");
+      toast.id = "toast";
+      toast.classList.add("toast");
+      document.body.appendChild(toast);
+      return toast;
     },
   };
   

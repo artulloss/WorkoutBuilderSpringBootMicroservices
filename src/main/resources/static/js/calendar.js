@@ -18,7 +18,7 @@ import { toast } from "./toast.js";
             url: '/api/workout',
             method: 'GET',
             failure: function() {
-                toast.error('There was an error while fetching events!');
+                toast.error('There was an error while fetching events!', 2000);
             },
             color: 'green',
             textColor: 'white'
