@@ -12,7 +12,7 @@ import { toast } from "./toast.js";
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth'
+            right: 'dayGridMonth,timeGridWeek'
         },
         events: {
             url: '/api/workout',
@@ -20,7 +20,7 @@ import { toast } from "./toast.js";
             failure: function() {
                 toast.error('There was an error while fetching events!', 2000);
             },
-            color: 'green',
+            color: '#A10A0A',
             textColor: 'white'
         },
         timeZone: 'UTC',
