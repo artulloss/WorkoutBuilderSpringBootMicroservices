@@ -2,22 +2,21 @@ import { toast } from "./toast.js";
 
 jQuery(($) => {
   const qs = document.querySelector.bind(document);
-
-  let exerciseCount = 0; // Counter to keep track of the number of exercises added
+  const qsa = document.querySelectorAll.bind(document);
+  const exerciseCount = () => qsa('.exercises .exercise')?.length || 0; // Get the number of exercises
 
   const addExercise = () => {
     const form = qs("form#logWorkout");
     const addExerciseBtn = form.querySelector("#addExercise");
     const addFormFields = (e) => {
       e && e.preventDefault();
-      exerciseCount++; // Increment the counter
       const template = form.querySelector("#exerciseFields");
       const clone = template.content.cloneNode(true);
       const exercises = form.querySelector(".exercises");
 
       // Set a unique ID for the new select element
       const select = clone.querySelector("select");
-      select.id = "exerciseSelect" + exerciseCount;
+      select.id = "exerciseSelect" + exerciseCount();
 
       exercises.appendChild(clone);
       addSelect2ToExercisePicker("#" + select.id); // Initialize select2 for the new select element
@@ -32,11 +31,10 @@ jQuery(($) => {
     const removeFormFields = (e) => {
       e && e.preventDefault();
       const exercises = form.querySelector(".exercises");
-      const lastExercise = exercises.lastElementChild;
-
-      if(lastExercise) {
+      if(exerciseCount() > 1) {
         exercises.querySelector(".exercise:last-of-type").remove();
-        exerciseCount--;
+      } else {
+        toast.error("A workout requires at least one exercise!", 2000);
       }
     };
     removeExerciseBtn && removeExerciseBtn.addEventListener("click", removeFormFields);
