@@ -42,7 +42,6 @@ jQuery(($) => {
 
   // Delegate event handling for the select change
   $(document).on("change", "form#logWorkout select", function () {
-    console.log("hello?", this);
     upStartRequiredFields(this);
   });
 
@@ -76,6 +75,15 @@ jQuery(($) => {
   const upStartRequiredFields = (selectElement) => {
     const selectedExercise = JSON.parse(selectElement.value);
     console.log({ selectedExercise });
+
+    const exercise = selectElement.closest(".exercise");
+    console.log({ exercise });
+
+    if(exercise) {
+      const exerciseName = exercise.querySelector("#exerciseName");
+      console.log({ exerciseName });
+      exerciseName.innerText = selectedExercise.name;
+    }
 
     const isCardio = selectedExercise.type.toLowerCase() === "cardio"; // Check if selected exercise is cardio
     const exerciseContainer = $(selectElement).closest(".exercise");

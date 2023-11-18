@@ -4,20 +4,3 @@ input[required] + label > span::after {
     content: "*";
     left: 2px;
 }
-
-
-.exercise {
-    position: relative;
-    margin-bottom: 20px;
-}
-
-/* This creates horizontal lines between exercises */
-.exercise::after {
-    position: absolute;
-    top: -5px;
-    content: "";
-    display: block;
-    width: 100%;
-    height: 2px;
-    background: red;
-}

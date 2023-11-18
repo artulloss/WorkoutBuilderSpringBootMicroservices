@@ -45,47 +45,50 @@
       </div>
     </div>
     <template id="exerciseFields">
-      <div class="exercise relative space-y-4">
-        <div class="form-control w-full max-w-xs">
-          <div>
-            <label class="label order-1" for="exercises">
-              <span class="label-text">Exercise Name</span>
-            </label>
-          </div>
-          <select id="exercises" name="exercises" class="order-2 input input-bordered w-full"></select>
-        </div>
-        <div class="flex flex-row space-x-4">
-          <div class="form-control w-full max-w-xs mr-2">
-            <input type="number" name="sets" id="exerciseSets" min="0" placeholder="Sets" class="order-2 input input-bordered w-full">
-            <label class="label order-1" for="exerciseSets">
-              <span class="label-text">Sets</span>
-            </label>
-          </div>
+      <div class="exercise collapse collapse-arrow join-item border border-base-300">
+        <input type="radio" name="my-accordion-4" checked="checked" />
+        <div id="exerciseName" class="collapse-title text-xl font-medium">Exercise Name</div>
+        <div class="collapse-content relative space-y-4">
           <div class="form-control w-full max-w-xs">
-            <input type="number" name="reps" id="exerciseReps" min="0" placeholder="Reps" class="order-2 input input-bordered w-full">
-            <label class="label order-1" for="exerciseReps">
-              <span class="label-text">Reps</span>
-            </label>
+            <div>
+              <label class="label order-1" for="exercises">
+                <span class="label-text">Exercise Name</span>
+              </label>
+            </div>
+            <select id="exercises" name="exercises" class="order-2 input input-bordered w-full"></select>
           </div>
-        </div>
-        <div class="flex flex-row gap-2">
-          <div class="flex form-control w-full max-w-xs mr-2">
-            <input type="number" name="weight" id="exerciseWeight" min="0" placeholder="Weight" class="order-2 input input-bordered w-full">
-            <label class="label order-1" for="exerciseWeight">
-              <span class="label-text">Weight (kg)</span>
-            </label>
+          <div class="flex flex-row space-x-4">
+            <div class="form-control w-full max-w-xs mr-2">
+              <input type="number" name="sets" id="exerciseSets" min="0" placeholder="Sets" class="order-2 input input-bordered w-full">
+              <label class="label order-1" for="exerciseSets">
+                <span class="label-text">Sets</span>
+              </label>
+            </div>
+            <div class="form-control w-full max-w-xs">
+              <input type="number" name="reps" id="exerciseReps" min="0" placeholder="Reps" class="order-2 input input-bordered w-full">
+              <label class="label order-1" for="exerciseReps">
+                <span class="label-text">Reps</span>
+              </label>
+            </div>
           </div>
-          <div class="flex form-control w-full max-w-xs">
-            <input type="number" name="duration" id="exerciseDuration" required min="0" placeholder="Duration" class="order-2 input input-bordered w-full">
-            <label class="label order-1" for="exerciseDuration">
-              <span class="label-text">Duration (minutes)</span>
-            </label>
+          <div class="flex flex-row gap-2">
+            <div class="flex form-control w-full max-w-xs mr-2">
+              <input type="number" name="weight" id="exerciseWeight" min="0" placeholder="Weight" class="order-2 input input-bordered w-full">
+              <label class="label order-1" for="exerciseWeight">
+                <span class="label-text">Weight (kg)</span>
+              </label>
+            </div>
+            <div class="flex form-control w-full max-w-xs">
+              <input type="number" name="duration" id="exerciseDuration" required min="0" placeholder="Duration" class="order-2 input input-bordered w-full">
+              <label class="label order-1" for="exerciseDuration">
+                <span class="label-text">Duration (minutes)</span>
+              </label>
+            </div>
           </div>
         </div>
       </div>
     </template>
-    <div class="exercises">
-    </div>
+    <div class="exercises join join-vertical w-full"></div>
     <button id="addExercise" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Add Exercise</button>
     <button id="removeExercise" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Remove Exercise</button>
     <button type="submit" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Log Workout</button>
