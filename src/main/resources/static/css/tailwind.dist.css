@@ -1671,11 +1671,6 @@ html {
   border-color: transparent;
 }
 
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
 .bg-lighter-red {
   --tw-bg-opacity: 1;
   background-color: rgb(161 10 10 / var(--tw-bg-opacity));
@@ -1754,6 +1749,11 @@ html {
 
 .text-center {
   text-align: center;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-4xl {

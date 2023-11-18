@@ -7,20 +7,17 @@
   <link rel="stylesheet" th:href="@{/css/tailwind.dist.css}">
   <script type="module" th:src="@{/js/main.js}" defer></script>
   <script type="module" th:src="@{/js/toast.js}" defer></script>
-
-  <script src="https://code.jquery.com/jquery-1.12.1.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 </head>
 <body>
-<div th:replace="fragments/topnav :: navbar"></div>
-<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-  <Label>Generate New Workout</Label>
-  <form id="logWorkout" action="#" method="POST" class="space-y-4">
+<div th:replace="~{fragments/topnav :: navbar}"></div>
+<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2">
+  <h1 class="text-3xl">Log New Workout</h1>
+  <form id="logWorkout" class="space-y-4">
     <div id="workoutFields" class="pb-4">
       <div class="form-control w-full max-w-xs">
         <input type="text" name="workoutName" id="workoutName" placeholder="Workout Name" class="order-2 input input-bordered w-full">
