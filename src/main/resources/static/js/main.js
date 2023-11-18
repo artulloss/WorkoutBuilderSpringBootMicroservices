@@ -153,7 +153,10 @@ jQuery(($) => {
       })
         .then((response) => response.json())
         .then(async () => {
+          form.reset();
           await toast.success("Workout logged successfully!", 2000);
+          // Remove all exercises except the first one
+          document.querySelectorAll('#exercises .exercise').forEach((e, i) => i && e.remove());
         })
         .catch(async (error) => {
           console.error("Error:", error);
