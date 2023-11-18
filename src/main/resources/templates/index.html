@@ -35,6 +35,18 @@
           <span class="label-text">Workout Description</span>
         </label>
       </div>
+      <div class="form-control w-full max-w-xs">
+        <input type="date" name="date" id="workoutStart" required class="order-2 input input-bordered w-full" />
+        <label for="workoutStart" class="label order-1">
+          <span class="label-text">Date</span>
+        </label>
+      </div>
+      <div class="form-control w-full max-w-xs">
+        <input type="number" min="0" step="5" name="date" id="workoutDuration" required class="order-2 input input-bordered w-full" />
+        <label for="workoutDuration" class="label order-1">
+          <span class="label-text">Duration</span>
+        </label>
+      </div>
     </div>
     <template id="exerciseFields">
       <br>
@@ -80,14 +92,6 @@
       </div>
     </template>
     <div class="exercises">
-    </div>
-    <div class="flex items-center">
-      <div class="form-control w-full max-w-xs">
-        <input type="date" name="date" id="workoutDate" required class="order-2 input input-bordered w-full" />
-        <label for="workoutDate" class="label order-1">
-          <span class="label-text">Date</span>
-        </label>
-      </div>
     </div>
     <button id="addExercise" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Add Exercise</button>
     <button type="submit" class="rounded-md bg-lighter-red px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">Log Workout</button>

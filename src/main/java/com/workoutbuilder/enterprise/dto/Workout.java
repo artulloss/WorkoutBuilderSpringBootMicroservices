@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -44,8 +46,22 @@ public class Workout {
     /**
      * The date when the workout took place
      */
-    private Date date;
+    private Date start;
 
+    /**
+     * The duration of the workout in minutes.
+     */
+    private int duration;
+
+    /**
+     * The date when the workout was completed.
+     */
+    public Date getEnd() {
+        val calendar = Calendar.getInstance();
+        calendar.setTime(start);
+        calendar.add(Calendar.MINUTE, duration);
+        return calendar.getTime();
+    }
 
     /**
      * A list of stored exercises that constitute this workout.

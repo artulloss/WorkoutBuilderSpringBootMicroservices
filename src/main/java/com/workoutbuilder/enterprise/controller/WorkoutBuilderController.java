@@ -23,7 +23,6 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -140,19 +139,20 @@ public class WorkoutBuilderController {
 
         for (var workout : workouts) {
             // Convert java.util.Date to LocalDateTime
-            LocalDateTime workoutDate = workout.getDate().toInstant()
+            LocalDateTime workoutStart = workout.getStart().toInstant()
+                    .atZone(ZoneId.ofOffset("UTC", ZoneOffset.UTC))
+                    .toLocalDateTime();
+
+            LocalDateTime workoutEnd = workout.getEnd().toInstant()
                     .atZone(ZoneId.ofOffset("UTC", ZoneOffset.UTC))
                     .toLocalDateTime();
 
             // Check if workout date is within the specified range
-            if ((start == null || !workoutDate.isBefore(start)) && (end == null || !workoutDate.isAfter(end))) {
+            if ((start == null || !workoutStart.isBefore(start)) && (end == null || !workoutEnd.isAfter(end))) {
                 var calendarWorkout = new CalendarWorkout();
                 calendarWorkout.setTitle(workout.getName());
-                calendarWorkout.setStart(workoutDate.format(DateTimeFormatter.ISO_DATE_TIME));
-
-                // Add one hour to the end time
-                LocalDateTime endWorkoutDate = workoutDate.plusHours(1);
-                calendarWorkout.setEnd(endWorkoutDate.toString());
+                calendarWorkout.setStart(workoutStart.format(DateTimeFormatter.ISO_DATE_TIME));
+                calendarWorkout.setEnd(workoutEnd.format(DateTimeFormatter.ISO_DATE_TIME));
 
                 calendarWorkouts.add(calendarWorkout);
             }

@@ -29,7 +29,7 @@ jQuery(($) => {
   // Delegate event handling for the select change
   $(document).on("change", "form#logWorkout select", function () {
     console.log("hello?", this);
-    updateRequiredFields(this);
+    upStartRequiredFields(this);
   });
 
   const addSelect2ToExercisePicker = (selector) => {
@@ -58,8 +58,8 @@ jQuery(($) => {
     });
   };
 
-  // Function to update required fields based on exercise type
-  const updateRequiredFields = (selectElement) => {
+  // Function to upStart required fields based on exercise type
+  const upStartRequiredFields = (selectElement) => {
     const selectedExercise = JSON.parse(selectElement.value);
     console.log({ selectedExercise });
 
@@ -82,8 +82,24 @@ jQuery(($) => {
         return;
       }
 
-      // Collect workout date
-      const workoutDate = form.querySelector("#workoutDate").value;
+      // Collect workout start
+      const workoutStart = form.querySelector("#workoutStart").value;
+      const workoutDuration = form.querySelector("#workoutDuration").value;
+
+      const workoutDurationSum = [...form.querySelectorAll(".exercise")].reduce((sum, exerciseDiv) => {
+        const duration = parseInt(exerciseDiv.querySelector('input[name="duration"]').value) || 0;
+        return sum + duration;
+      }, 0);
+
+      if(workoutDuration < 1) {
+        toast.error("Workout duration must be greater than 0!", 2000);
+        return;
+      }
+
+      if(workoutDurationSum > workoutDuration) {
+        toast.error("Workout duration is less than the sum of the duration of the exercises!", 2000);
+        return;   
+      }
 
       // Collect exercises
       const exercises = [];
@@ -116,7 +132,8 @@ jQuery(($) => {
 
       // Create JSON object
       const workoutData = {
-        date: workoutDate,
+        start: workoutStart,
+        duration: workoutDuration,
         name: String(
             document.querySelector('input[name="workoutName"]').value
         ),
