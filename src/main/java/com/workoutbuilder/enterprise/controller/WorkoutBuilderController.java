@@ -53,11 +53,13 @@ public class WorkoutBuilderController {
         Workout workout = new Workout();
         model.addAttribute("storedExercise", storedExercise);
         model.addAttribute("workout", workout);
+        model.addAttribute("currentPage", "dashboard");
         return "/index";
     }
 
     @GetMapping("/calendar")
     public String calendar(Model model) throws IOException {
+        model.addAttribute("currentPage", "calendar");
         return "/calendar";
     }
 
