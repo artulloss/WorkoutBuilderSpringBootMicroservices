@@ -49,11 +49,6 @@ public class WorkoutBuilderController {
      */
     @GetMapping("/")
     public String index(Model model) throws IOException {
-        StoredExercise storedExercise = new StoredExercise();
-        Workout workout = new Workout();
-        model.addAttribute("storedExercise", storedExercise);
-        model.addAttribute("workout", workout);
-        model.addAttribute("currentPage", "dashboard");
         return "/index";
     }
 
@@ -61,6 +56,18 @@ public class WorkoutBuilderController {
     public String calendar(Model model) throws IOException {
         model.addAttribute("currentPage", "calendar");
         return "/calendar";
+    }
+
+    @GetMapping("/workout/{id}")
+    public String workout(Model model, @PathVariable("id") int id) throws IOException {
+        Optional<Workout> workout = Optional.ofNullable(workoutService.findById(id));
+        if (workout.isPresent()) {
+            model.addAttribute("workout", workout.get());
+            model.addAttribute("currentPage", "workout");
+            return "/single-workout";
+        } else {
+            return "redirect:/";
+        }
     }
 
     /**

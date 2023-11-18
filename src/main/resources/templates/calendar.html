@@ -14,9 +14,9 @@
 
 </head>
 <body>
-<div th:replace="fragments/topnav :: navbar"></div>
+<div th:replace="~{fragments/topnav :: navbar}"></div>
 <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <h1>Calendar</h1>
+    <h1 class="text-3xl">Calendar</h1>
     <div id="calendar"></div>
 </main>
 </body>

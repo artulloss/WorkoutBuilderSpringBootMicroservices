@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${workout.name}">Workout</title>
+    <link rel="stylesheet" th:href="@{/css/application.css}">
+    <link rel="stylesheet" th:href="@{/css/tailwind.dist.css}">
+    <script type="module" th:src="@{/js/calendar.js}" defer></script>
+    <script type="module" th:src="@{/js/toast.js}" defer></script>
+
+    <script src="
+    https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js
+    "></script>
+
+</head>
+<body>
+<div th:replace="~{fragments/topnav :: navbar}"></div>
+<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl" th:text="${workout.name}"></h1>
+
+    <div th:each="exercise : ${workout.exercises}">
+        <div class="join join-vertical w-full">
+            <div class="collapse collapse-arrow join-item border border-base-300">
+                <input type="radio" name="my-accordion-4" checked="checked" />
+                <div class="collapse-title text-xl font-medium">
+                    <h2 th:text="${exercise.name}"></h2>
+                </div>
+                <div class="collapse-content">
+                    <div class="stats stats-vertical lg:stats-horizontal shadow">
+                        <div th:if="${exercise.sets != null}" class="stat">
+                            <div class="stat-title">Sets</div>
+                            <div class="stat-value" th:text="${exercise.sets}"></div>
+                        </div>
+
+                        <div th:if="${exercise.reps != null}" class="stat">
+                            <div class="stat-title">Reps</div>
+                            <div class="stat-value" th:text="${exercise.reps}"></div>
+                        </div>
+
+                        <div th:if="${exercise.weight != null}" class="stat">
+                            <div class="stat-title">Weight</div>
+                            <div class="stat-value" th:text="${exercise.weight}"></div>
+                            <div class="stat-desc">kg</div>
+                        </div>
+
+                        <div th:if="${exercise.duration != null}" class="stat">
+                            <div class="stat-title">Duration</div>
+                            <div class="stat-value" th:text="${exercise.duration}"></div>
+                            <div class="stat-desc">mins</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>
