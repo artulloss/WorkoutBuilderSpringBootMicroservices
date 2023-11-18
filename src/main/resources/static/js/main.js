@@ -26,6 +26,22 @@ jQuery(($) => {
     addFormFields();
   };
 
+  const removeExercise = () => {
+    const form = qs("form#logWorkout");
+    const removeExerciseBtn = form.querySelector("#removeExercise");
+    const removeFormFields = (e) => {
+      e && e.preventDefault();
+      const exercises = form.querySelector(".exercises");
+      const lastExercise = exercises.lastElementChild;
+
+      if(lastExercise) {
+        exercises.removeChild(lastExercise);
+        exerciseCount--;
+      }
+    };
+    removeExerciseBtn && removeExerciseBtn.addEventListener("click", removeFormFields);
+  };
+
   // Delegate event handling for the select change
   $(document).on("change", "form#logWorkout select", function () {
     console.log("hello?", this);
@@ -167,5 +183,6 @@ jQuery(($) => {
 
   addExercise();
   logWorkoutForm();
+  removeExercise();
 });
 
