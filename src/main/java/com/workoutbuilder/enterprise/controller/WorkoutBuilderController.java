@@ -155,6 +155,7 @@ public class WorkoutBuilderController {
                 calendarWorkout.setTitle(workout.getName());
                 calendarWorkout.setStart(workoutStart.format(DateTimeFormatter.ISO_DATE_TIME));
                 calendarWorkout.setEnd(workoutEnd.format(DateTimeFormatter.ISO_DATE_TIME));
+                calendarWorkout.setUrl("/workout/" + workout.getId());
 
                 calendarWorkouts.add(calendarWorkout);
             }

@@ -6,7 +6,11 @@ import lombok.Data;
 public class CalendarWorkout {
 
     private String title;
+
     private String start;
+
     private String end;
+
+    private String url;
 
 }
