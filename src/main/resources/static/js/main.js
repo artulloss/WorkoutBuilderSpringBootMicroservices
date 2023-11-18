@@ -35,7 +35,7 @@ jQuery(($) => {
       const lastExercise = exercises.lastElementChild;
 
       if(lastExercise) {
-        exercises.removeChild(lastExercise);
+        exercises.querySelector(".exercise:last-of-type").remove();
         exerciseCount--;
       }
     };
@@ -182,7 +182,7 @@ jQuery(($) => {
   };
 
   addExercise();
-  logWorkoutForm();
   removeExercise();
+  logWorkoutForm();
 });
 
