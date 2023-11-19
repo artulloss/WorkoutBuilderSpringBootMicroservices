@@ -109,11 +109,14 @@ public class WorkoutBuilderController {
     public ResponseEntity<List<Exercise>> searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
         try {
             List<Exercise> exercises = exerciseService.findByName(name);
+            if (exercises == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             return new ResponseEntity<>(exercises, headers, HttpStatus.OK);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();  // Log the exception or handle it appropriately
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
