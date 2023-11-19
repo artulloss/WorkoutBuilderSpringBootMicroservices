@@ -17,7 +17,37 @@
 <div th:replace="~{fragments/topnav :: navbar}"></div>
 <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-    <h1 class="text-3xl" th:text="${exercise.name}"></h1>
+
+    <h1 class="text-3xl pt-2 pb-3" th:text="${exercise.name}"></h1>
+
+    <div class="space-y-4">
+        <div class="flex flex-row">
+            <div class="pr-4">
+                <h3 class="text-lg font-medium">Difficulty</h3>
+                <p th:text="${exercise.difficulty}"></p>
+            </div>
+            <div class="pr-4">
+                <h3 class="text-lg font-medium">Equipment</h3>
+                <p th:text="${exercise.equipment}"></p>
+            </div>
+        </div>
+        <div class="flex flex-row">
+            <div class="pr-4">
+                <h3 class="text-lg font-medium">Muscle</h3>
+                <p th:text="${exercise.muscle}"></p>
+            </div>
+            <div class="pr-4">
+                <h3 class="text-lg font-medium">Type</h3>
+                <p th:text="${exercise.type}"></p>
+            </div>
+        </div>
+        <div>
+            <div class="pr-4">
+                <h3 class="text-lg font-medium">Instructions</h3>
+                <p th:text="${exercise.instructions}"></p>
+            </div>
+        </div>
+    </div>
 
 
 
