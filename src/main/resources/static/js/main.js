@@ -195,7 +195,14 @@ jQuery(($) => {
           form.reset();
           await toast.success("Workout logged successfully!", 2000);
           // Remove all exercises except the first one
-          document.querySelectorAll('#exercises .exercise').forEach((e, i) => i && e.remove());
+          document.querySelectorAll('.exercises .exercise').forEach((e, i) => i && e.remove());
+            // Reset the first exercise
+          const firstExercise = document.querySelector('.exercises .exercise');
+          const firstExerciseSelect = firstExercise.querySelector('select');
+          const firstExerciseName = firstExercise.querySelector('#exerciseName');
+          $(firstExerciseSelect).select2('data', null);
+          firstExerciseName.innerText = 'Exercise';
+
         })
         .catch(async (error) => {
           console.error("Error:", error);
