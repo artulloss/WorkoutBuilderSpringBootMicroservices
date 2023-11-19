@@ -28,8 +28,7 @@
                 <div class="collapse-content space-y-4">
 
                     <div th:if="${exercise.difficulty != null}">
-                        <h3 class="text-lg font-medium">Difficulty:</h3>
-                        <p th:text="${exercise.difficulty}"></p>
+                        <h3 class="text-lg font-medium">Difficulty: <span th:text="${exercise.difficulty}"></span></h3>
                     </div>
                     <div>
                         <a class="link" th:href="@{'/exercise/' + ${exercise.name}}">View Exercise Details</a>
