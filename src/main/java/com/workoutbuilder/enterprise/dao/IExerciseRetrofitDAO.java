@@ -15,4 +15,6 @@ public interface IExerciseRetrofitDAO {
     @GET("/v1/exercises")
     Call<List<Exercise>> getExercisesByName(@Query("name") String name);
 
+    @GET("/v1/exercises")
+    Call<List<Exercise>> findExercise(@Query("name") String name);
 }

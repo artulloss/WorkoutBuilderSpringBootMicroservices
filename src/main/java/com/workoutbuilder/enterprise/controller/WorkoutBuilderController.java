@@ -106,15 +106,15 @@ public class WorkoutBuilderController {
     }
 
     @GetMapping("api/searchExercise")
-    public ResponseEntity<List<Exercise>> searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
+    public ResponseEntity<Exercise> searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
         try {
-            List<Exercise> exercises = exerciseService.findByName(name);
+            Exercise exercise = exerciseService.findExercise(name);
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            return new ResponseEntity<>(exercises, headers, HttpStatus.OK);
+            return new ResponseEntity<>(exercise, headers, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
 

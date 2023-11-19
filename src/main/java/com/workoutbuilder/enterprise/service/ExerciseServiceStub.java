@@ -69,4 +69,9 @@ public class ExerciseServiceStub implements IExerciseService{
     public List<Exercise> findExercisesByWorkoutId(long workoutId) {
         return null;
     }
+
+    @Override
+    public Exercise findExercise(String name) throws IOException {
+        return exerciseDAO.findExercise(name);
+    }
 }

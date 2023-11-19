@@ -50,4 +50,6 @@ public interface IExerciseService {
      * @return A list of exercises with the given workout ID.
      */
     List<Exercise> findExercisesByWorkoutId(long workoutId);
+
+    Exercise findExercise(String name) throws IOException;
 }
