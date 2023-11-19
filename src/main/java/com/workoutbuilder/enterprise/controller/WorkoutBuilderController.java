@@ -178,20 +178,24 @@ public class WorkoutBuilderController {
      */
     @PostMapping(value = "api/workout", consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public Workout logWorkout(@RequestBody Workout workout) {
-        // Save workout first (without exercises)
-        workout = workoutService.saveWorkout(workout);
+    public ResponseEntity<Object> logWorkout(@RequestBody Workout workout) {
+        try {
+            // Save workout first (without exercises)
+            workout = workoutService.saveWorkout(workout);
 
-        List<StoredExercise> savedExercises = new ArrayList<>();
-        for (StoredExercise exercise : workout.getExercises()) {
-            exercise.setWorkout(workout);
-            StoredExercise savedExercise = storedExerciseService.saveStoredExercise(exercise);
-            savedExercises.add(savedExercise);
+            List<StoredExercise> savedExercises = new ArrayList<>();
+            for (StoredExercise exercise : workout.getExercises()) {
+                exercise.setWorkout(workout);
+                StoredExercise savedExercise = storedExerciseService.saveStoredExercise(exercise);
+                savedExercises.add(savedExercise);
+            }
+
+            // Add saved exercises to the workout and update it
+            workout.setExercises(savedExercises);
+            return new ResponseEntity<>(workoutService.saveWorkout(workout), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        // Add saved exercises to the workout and update it
-        workout.setExercises(savedExercises);
-        return workoutService.saveWorkout(workout);
     }
 
     /**
