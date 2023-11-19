@@ -7,6 +7,7 @@ import com.workoutbuilder.enterprise.dto.Workout;
 import com.workoutbuilder.enterprise.service.IExerciseService;
 import com.workoutbuilder.enterprise.service.IStoredExerciseService;
 import com.workoutbuilder.enterprise.service.IWorkoutService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
@@ -65,6 +66,18 @@ public class WorkoutBuilderController {
             model.addAttribute("workout", workout.get());
             model.addAttribute("currentPage", "workout");
             return "/single-workout";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/exercise/{name}")
+    public String singleExercise(Model model, @PathVariable("name") String name) throws IOException {
+        Exercise exercise = exerciseService.findExercise(name);
+        if (exercise != null) {
+            model.addAttribute("exercise", exercise);
+            model.addAttribute("currentPage", "exercise");
+            return "/single-exercise";
         } else {
             return "redirect:/";
         }

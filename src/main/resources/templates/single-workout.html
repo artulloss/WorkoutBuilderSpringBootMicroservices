@@ -26,7 +26,7 @@
                     <h2 th:text="${exercise.name}"></h2>
                 </div>
                 <div class="collapse-content">
-
+                    <span><a th:href="@{'/exercise/' + ${exercise.name}}">Detailed View ></a></span>
                     <div th:if="${exercise.instructions != null}">
                         <h3 class="text-lg font-medium">Instructions</h3>
                         <p th:text="${exercise.instructions}"></p>
