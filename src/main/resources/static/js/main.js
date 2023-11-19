@@ -94,13 +94,30 @@ jQuery(($) => {
     exerciseContainer.find("#exerciseDuration").prop("required", isCardio);
   };
 
+  const openAccordionIfEmptyRequiredFields = (accordion) => {
+    const requiredInputs = accordion.querySelectorAll('input[required], textarea[required], select[required]');
+
+    let isEmpty = false;
+    requiredInputs.forEach(input => {
+      if (!input.value.trim()) {
+        isEmpty = true;
+      }
+    });
+
+    if (isEmpty) {
+      accordion.checked = true; // Accordion is a checkbox
+    }
+  }
+
   const logWorkoutForm = (e) => {
     const form = qs("form#logWorkout");
     form.addEventListener("submit", (e) => {
       e.preventDefault(); // Prevent the default form submission
-
       if (!form.checkValidity()) {
+        const accordions = qsa('form#logWorkout .accordion-toggle');
+        accordions && accordions.forEach((a) => a.checked = true);
         form.reportValidity(); // Trigger HTML validation
+        toast.error("Please fill in all required fields!", 2000);
         return;
       }
 
