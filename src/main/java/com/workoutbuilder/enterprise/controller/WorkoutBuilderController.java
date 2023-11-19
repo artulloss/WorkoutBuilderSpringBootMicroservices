@@ -61,13 +61,10 @@ public class WorkoutBuilderController {
     @GetMapping("/workout/{id}")
     public String workout(Model model, @PathVariable("id") int id) throws IOException {
         Optional<Workout> workout = Optional.ofNullable(workoutService.findById(id));
-        if (workout.isPresent()) {
-            model.addAttribute("workout", workout.get());
-            model.addAttribute("currentPage", "workout");
-            return "/single-workout";
-        } else {
-            return "redirect:/";
-        }
+        Workout validWorkout = workout.orElseThrow(() -> new IllegalArgumentException("Workout not found"));
+        model.addAttribute("workout", validWorkout);
+        model.addAttribute("currentPage", "workout");
+        return "/single-workout";
     }
 
     /**
