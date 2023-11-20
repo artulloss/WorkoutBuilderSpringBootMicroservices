@@ -129,7 +129,7 @@ public class WorkoutBuilderController {
     @GetMapping("api/searchExercise")
     public ResponseEntity<Exercise> searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
         try {
-            Exercise exercise = exerciseService.findExercise(name)
+            Exercise exercise = exerciseService.findExercise(name);
               
             if (exercise == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
