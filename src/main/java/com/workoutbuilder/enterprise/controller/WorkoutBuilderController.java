@@ -50,6 +50,8 @@ public class WorkoutBuilderController {
      */
     @GetMapping("/")
     public String index(Model model) throws IOException {
+
+        model.addAttribute("currentPage", "dashboard");
         return "/index";
     }
 
@@ -76,7 +78,7 @@ public class WorkoutBuilderController {
         Exercise exercise = exerciseService.findExercise(name);
         if (exercise != null) {
             model.addAttribute("exercise", exercise);
-            model.addAttribute("currentPage", "exercise");
+            model.addAttribute("currentPage", "exercises");
             return "/single-exercise";
         } else {
             return "redirect:/";
@@ -85,6 +87,7 @@ public class WorkoutBuilderController {
 
     @GetMapping("/exercises")
     public String exercises(Model model) throws IOException {
+        model.addAttribute("currentPage", "exercises");
         return "/exercises";
     }
 

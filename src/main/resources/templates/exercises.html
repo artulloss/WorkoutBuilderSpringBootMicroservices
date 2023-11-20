@@ -26,16 +26,12 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
         </svg>
       </div>
-      <input type="search" id="exercise-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-lighter-red " placeholder="Search Exercises..." required>
+      <input type="search" id="exercise-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-lighter-red " placeholder="Start typing to view exercises..." required>
     </div>
   </form>
-  <div id="exerciseContainer" class="pt-2">
-      <div class="w-full p-4 ps-10 border border-gray-300 rounded-lg flex flex-row space-x-4">
-        <p class="font-medium "> Bench Press </p>
-        <p class="text-gray-500 font-light ">Difficulty: INTERMEDIATE</p>
-        <div class="flex-grow "></div>
-        <a class="flex justify-end link text-deep-red" th:href="@{'/exercise/Dumbbell Bench Press'}">View Details ></a>
-      </div>
+
+  <div id="exerciseContainer" class="pt-10">
+    <p class="text-deep-red flex justify-center align-middle pt-10">No exercises found!</p>
   </div>
 
 
