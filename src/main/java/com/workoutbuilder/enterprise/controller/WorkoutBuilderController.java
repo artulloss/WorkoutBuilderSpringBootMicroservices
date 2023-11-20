@@ -129,13 +129,18 @@ public class WorkoutBuilderController {
     @GetMapping("api/searchExercise")
     public ResponseEntity<Exercise> searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
         try {
-            Exercise exercise = exerciseService.findExercise(name);
+            Exercise exercise = exerciseService.findExercise(name)
+              
+            if (exercise == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+          
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             return new ResponseEntity<>(exercise, headers, HttpStatus.OK);
         } catch (IOException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.OK);
+            e.printStackTrace();  // Log the exception or handle it appropriately
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -199,20 +204,24 @@ public class WorkoutBuilderController {
      */
     @PostMapping(value = "api/workout", consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public Workout logWorkout(@RequestBody Workout workout) {
-        // Save workout first (without exercises)
-        workout = workoutService.saveWorkout(workout);
+    public ResponseEntity<Object> logWorkout(@RequestBody Workout workout) {
+        try {
+            // Save workout first (without exercises)
+            workout = workoutService.saveWorkout(workout);
 
-        List<StoredExercise> savedExercises = new ArrayList<>();
-        for (StoredExercise exercise : workout.getExercises()) {
-            exercise.setWorkout(workout);
-            StoredExercise savedExercise = storedExerciseService.saveStoredExercise(exercise);
-            savedExercises.add(savedExercise);
+            List<StoredExercise> savedExercises = new ArrayList<>();
+            for (StoredExercise exercise : workout.getExercises()) {
+                exercise.setWorkout(workout);
+                StoredExercise savedExercise = storedExerciseService.saveStoredExercise(exercise);
+                savedExercises.add(savedExercise);
+            }
+
+            // Add saved exercises to the workout and update it
+            workout.setExercises(savedExercises);
+            return new ResponseEntity<>(workoutService.saveWorkout(workout), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        // Add saved exercises to the workout and update it
-        workout.setExercises(savedExercises);
-        return workoutService.saveWorkout(workout);
     }
 
     /**

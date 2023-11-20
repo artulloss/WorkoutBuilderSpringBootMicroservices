@@ -17,7 +17,7 @@
 <div th:replace="~{fragments/topnav :: navbar}"></div>
 <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2">
   <h1 class="text-3xl">Log New Workout</h1>
-  <form id="logWorkout" class="space-y-4">
+  <form id="logWorkout" class="space-y-4" novalidate>
     <div id="workoutFields" class="pb-4">
       <div class="form-control w-full max-w-xs">
         <input type="text" name="workoutName" id="workoutName" placeholder="Workout Name" class="order-2 input input-bordered w-full">
@@ -40,13 +40,13 @@
       <div class="form-control w-full max-w-xs">
         <input type="number" min="0" step="5" name="date" id="workoutDuration" required class="order-2 input input-bordered w-full" />
         <label for="workoutDuration" class="label order-1">
-          <span class="label-text">Duration</span>
+          <span class="label-text">Duration (minutes)</span>
         </label>
       </div>
     </div>
     <template id="exerciseFields">
       <div class="exercise collapse collapse-arrow join-item border border-base-300">
-        <input type="radio" name="my-accordion-4" checked="checked" />
+        <input class="accordion-toggle" type="checkbox" checked />
         <div id="exerciseName" class="collapse-title text-xl font-medium">Exercise Name</div>
         <div class="collapse-content relative space-y-4">
           <div class="form-control w-full max-w-xs">
