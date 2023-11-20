@@ -4,3 +4,14 @@ input[required] + label > span::after {
     content: "*";
     left: 2px;
 }
+
+/* Fullcalendar color scheme */
+:root {
+    --fc-button-text-color: #fff;
+    --fc-button-bg-color: #8B0000;
+    --fc-button-border-color: #8B0000;
+    --fc-button-hover-bg-color: #A10A0A;
+    --fc-button-hover-border-color: #A10A0A;
+    --fc-button-active-bg-color: #A10A0A;
+    --fc-button-active-border-color: #A10A0A;
+}

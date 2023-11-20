@@ -18,30 +18,34 @@
 <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2">
   <h1 class="text-3xl">Log New Workout</h1>
   <form id="logWorkout" class="space-y-4" novalidate>
-    <div id="workoutFields" class="pb-4">
-      <div class="form-control w-full max-w-xs">
-        <input type="text" name="workoutName" id="workoutName" placeholder="Workout Name" class="order-2 input input-bordered w-full">
-        <label class="label order-1">
-          <span class="label-text">Workout Name</span>
-        </label>
+    <div id="workoutFields" class="relative space-y-4">
+      <div class="flex flex-row space-x-4">
+        <div class="flex form-control w-full max-w-xs mr-2">
+          <input type="text" name="workoutName" id="workoutName" placeholder="Workout Name" class="order-2 input input-bordered w-full">
+          <label class="label order-1">
+            <span class="label-text">Workout Name</span>
+          </label>
+        </div>
+        <div class="flex form-control w-full max-w-xs mr-2">
+          <input type="date" name="date" id="workoutStart" required class="order-2 input input-bordered w-full" />
+          <label for="workoutStart" class="label order-1">
+            <span class="label-text">Date</span>
+          </label>
+        </div>
       </div>
-      <div class="form-control w-full max-w-xs">
-        <textarea type="text" name="workoutDescription" id="workoutDescription" placeholder="Workout Description" class="order-2 input input-bordered w-full"></textarea>
-        <label class="label order-1">
-          <span class="label-text">Workout Description</span>
-        </label>
-      </div>
-      <div class="form-control w-full max-w-xs">
-        <input type="date" name="date" id="workoutStart" required class="order-2 input input-bordered w-full" />
-        <label for="workoutStart" class="label order-1">
-          <span class="label-text">Date</span>
-        </label>
-      </div>
-      <div class="form-control w-full max-w-xs">
-        <input type="number" min="0" step="5" name="date" id="workoutDuration" required class="order-2 input input-bordered w-full" />
-        <label for="workoutDuration" class="label order-1">
-          <span class="label-text">Duration (minutes)</span>
-        </label>
+      <div class="flex flex-row space-x-4">
+        <div class="flex form-control h-full w-full max-w-xs mr-2">
+          <textarea type="text" name="workoutDescription" id="workoutDescription" placeholder="Workout Description" class="order-2 textarea textarea-bordered w-full"></textarea>
+          <label class="label order-1">
+            <span class="label-text">Workout Description</span>
+          </label>
+        </div>
+        <div class="flex form-control w-full max-w-xs mr-2">
+          <input type="number" min="0" step="5" name="date" id="workoutDuration" required class="order-2 input input-bordered w-full" />
+          <label for="workoutDuration" class="label order-1">
+            <span class="label-text">Duration (minutes)</span>
+          </label>
+        </div>
       </div>
     </div>
     <template id="exerciseFields">

@@ -55,12 +55,25 @@ public class WorkoutBuilderController {
         return "/index";
     }
 
+    /**
+     * Maps the '/calendar' URL to the calendar page
+     * @param model Model object for UI rendering.
+     * @return calendar page
+     * @throws IOException exception
+     */
     @GetMapping("/calendar")
     public String calendar(Model model) throws IOException {
         model.addAttribute("currentPage", "calendar");
         return "/calendar";
     }
 
+    /**
+     * Maps a workout with an ID to a page to view workout details
+     * @param model Model object for UI rendering
+     * @param id workout ID
+     * @return single workout page
+     * @throws IOException exception
+     */
     @GetMapping("/workout/{id}")
     public String workout(Model model, @PathVariable("id") int id) throws IOException {
         Optional<Workout> workout = Optional.ofNullable(workoutService.findById(id));
@@ -73,21 +86,33 @@ public class WorkoutBuilderController {
         }
     }
 
+    /**
+     * Maps an exercise with an ID to a page to view exercise details
+     * @param model Model object for UI rendering
+     * @return single exercise page
+     * @throws IOException exception
+     */
     @GetMapping("/exercise/{name}")
     public String singleExercise(Model model, @PathVariable("name") String name) throws IOException {
         Exercise exercise = exerciseService.findExercise(name);
         if (exercise != null) {
             model.addAttribute("exercise", exercise);
-            model.addAttribute("currentPage", "exercises");
+            model.addAttribute("currentPage", "exercise");
             return "/single-exercise";
         } else {
             return "redirect:/";
         }
     }
 
+    /**
+     * Maps the '/exercises' URL to the exercise library page
+     * @param model Model object for UI rendering
+     * @return exercise library page
+     * @throws IOException exercise
+     */
     @GetMapping("/exercises")
     public String exercises(Model model) throws IOException {
-        model.addAttribute("currentPage", "exercises");
+        model.addAttribute("currentPage", "exercise");
         return "/exercises";
     }
 
@@ -110,6 +135,11 @@ public class WorkoutBuilderController {
         }
     }
 
+    /**
+     * Returns a list of exercises from api from a given name
+     * @param name search name for exercises to be found
+     * @return a list of 10 exercises
+     */
     @GetMapping("api/searchExerciseAutocomplete")
     public ResponseEntity<List<Exercise>> searchExerciseAutocomplete(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
         try {
@@ -126,6 +156,11 @@ public class WorkoutBuilderController {
         }
     }
 
+    /**
+     * Returns a single exercise from api from a given name
+     * @param name name of the exercise to be found
+     * @return a single exercise
+     */
     @GetMapping("api/searchExercise")
     public ResponseEntity<Exercise> searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
         try {
