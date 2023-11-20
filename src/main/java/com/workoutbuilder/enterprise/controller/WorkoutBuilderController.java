@@ -7,6 +7,7 @@ import com.workoutbuilder.enterprise.dto.Workout;
 import com.workoutbuilder.enterprise.service.IExerciseService;
 import com.workoutbuilder.enterprise.service.IStoredExerciseService;
 import com.workoutbuilder.enterprise.service.IWorkoutService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
@@ -49,6 +50,8 @@ public class WorkoutBuilderController {
      */
     @GetMapping("/")
     public String index(Model model) throws IOException {
+
+        model.addAttribute("currentPage", "dashboard");
         return "/index";
     }
 
@@ -68,6 +71,24 @@ public class WorkoutBuilderController {
         } else {
             return "redirect:/";
         }
+    }
+
+    @GetMapping("/exercise/{name}")
+    public String singleExercise(Model model, @PathVariable("name") String name) throws IOException {
+        Exercise exercise = exerciseService.findExercise(name);
+        if (exercise != null) {
+            model.addAttribute("exercise", exercise);
+            model.addAttribute("currentPage", "exercises");
+            return "/single-exercise";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/exercises")
+    public String exercises(Model model) throws IOException {
+        model.addAttribute("currentPage", "exercises");
+        return "/exercises";
     }
 
     /**
@@ -106,15 +127,17 @@ public class WorkoutBuilderController {
     }
 
     @GetMapping("api/searchExercise")
-    public ResponseEntity<List<Exercise>> searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
+    public ResponseEntity<Exercise> searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
         try {
-            List<Exercise> exercises = exerciseService.findByName(name);
-            if (exercises == null) {
+            Exercise exercise = exerciseService.findExercise(name)
+              
+            if (exercise == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
+          
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            return new ResponseEntity<>(exercises, headers, HttpStatus.OK);
+            return new ResponseEntity<>(exercise, headers, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();  // Log the exception or handle it appropriately
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

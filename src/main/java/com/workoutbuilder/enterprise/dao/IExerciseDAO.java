@@ -21,6 +21,8 @@ public interface IExerciseDAO {
 
     List<Exercise> findByName(String name) throws IOException;
 
+    Exercise findExercise(String name) throws IOException;
+
     /**
      * Find and return an exercise by its unique ID.
      *
@@ -28,6 +30,7 @@ public interface IExerciseDAO {
      * @return The exercise with the given ID or null if not found.
      */
     StoredExercise findById(long id);
+
 
     /**
      * Retrieve exercises associated with a specific workout, identified by its ID.
