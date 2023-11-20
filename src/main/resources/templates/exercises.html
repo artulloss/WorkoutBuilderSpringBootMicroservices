@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Workout Logger — Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/application.css}">
+  <link rel="stylesheet" th:href="@{/css/tailwind.dist.css}">
+  <script type="module" th:src="@{/js/exercises.js}" defer></script>
+  <script type="module" th:src="@{/js/toast.js}" defer></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+</head>
+<body>
+<div th:replace="~{fragments/topnav :: navbar}"></div>
+<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2">
+  <h1 class="text-3xl pt-2 pb-4">Search Exercises</h1>
+
+  <form>
+    <label for="exercise-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <div class="relative">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+      </div>
+      <input type="search" id="exercise-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-lighter-red " placeholder="Search Exercises..." required>
+    </div>
+  </form>
+  <div id="exerciseContainer" class="pt-2">
+      <div class="w-full p-4 ps-10 border border-gray-300 rounded-lg flex flex-row space-x-4">
+        <p class="font-medium "> Bench Press </p>
+        <p class="text-gray-500 font-light ">Difficulty: INTERMEDIATE</p>
+        <div class="flex-grow "></div>
+        <a class="flex justify-end link text-deep-red" th:href="@{'/exercise/Dumbbell Bench Press'}">View Details ></a>
+      </div>
+  </div>
+
+
+
+
+  <!-- By embedding this as markup, Tailwind recognizes the classes -->
+  <template id="toastTemplate">
+    <div class="alert">
+      <span>{message}</span>
+    </div>
+  </template>
+  <template id="alertTypes">
+    <div class="alert-info"></div>
+    <div class="alert-success"></div>
+    <div class="alert-warning"></div>
+    <div class="alert-error"></div>
+  </template>
+  <div id="toast" class="toast">
+  </div>
+</main>
+</body>
+</html>

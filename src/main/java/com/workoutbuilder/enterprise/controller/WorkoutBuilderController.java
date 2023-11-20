@@ -83,6 +83,11 @@ public class WorkoutBuilderController {
         }
     }
 
+    @GetMapping("/exercises")
+    public String exercises(Model model) throws IOException {
+        return "/exercises";
+    }
+
     /**
      * Retrieves a list of all exercises.
      *
