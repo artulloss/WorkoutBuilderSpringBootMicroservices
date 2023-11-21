@@ -16,8 +16,10 @@
 <body>
 <div th:replace="~{fragments/topnav :: navbar}"></div>
 <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl pt-2 pb-3" th:text="${workout.name}"></h1>
-
+    <h1 class="text-3xl pt-2 pb-3" th:text="${workout.name + ' - ' + workout.getEnd()}"></h1>
+    <div class="pb-4">
+        <p th:text="${workout.description}"></p>
+    </div>
     <div th:each="exercise : ${workout.exercises}">
         <div class="join join-vertical w-full">
             <div class="collapse collapse-arrow join-item border border-base-300">
