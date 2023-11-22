@@ -209,9 +209,9 @@ public class WorkoutBuilderController {
 
         List<Workout> workouts = workoutService.findAll();
 
-        var calendarWorkouts = new ArrayList<CalendarWorkout>();
+        List<CalendarWorkout> calendarWorkouts = new ArrayList<CalendarWorkout>();
 
-        for (var workout : workouts) {
+        for (Workout workout : workouts) {
             // Convert java.util.Date to LocalDateTime
             LocalDateTime workoutStart = workout.getStart().toInstant()
                     .atZone(ZoneId.ofOffset("UTC", ZoneOffset.UTC))
@@ -223,7 +223,7 @@ public class WorkoutBuilderController {
 
             // Check if workout date is within the specified range
             if ((start == null || !workoutStart.isBefore(start)) && (end == null || !workoutEnd.isAfter(end))) {
-                var calendarWorkout = new CalendarWorkout();
+                CalendarWorkout calendarWorkout = new CalendarWorkout();
                 calendarWorkout.setTitle(workout.getName());
                 calendarWorkout.setStart(workoutStart.format(DateTimeFormatter.ISO_DATE_TIME));
                 calendarWorkout.setEnd(workoutEnd.format(DateTimeFormatter.ISO_DATE_TIME));
