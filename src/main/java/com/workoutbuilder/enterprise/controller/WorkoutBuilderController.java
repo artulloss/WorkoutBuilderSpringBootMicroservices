@@ -8,6 +8,8 @@ import com.workoutbuilder.enterprise.service.IExerciseService;
 import com.workoutbuilder.enterprise.service.IStoredExerciseService;
 import com.workoutbuilder.enterprise.service.IWorkoutService;
 import jakarta.websocket.server.PathParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
@@ -41,6 +43,8 @@ public class WorkoutBuilderController {
 
     @Autowired
     IWorkoutService workoutService;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(WorkoutBuilderController.class.getName());
 
     /**
      * Maps the root URL ("/") to the index page.
@@ -272,7 +276,7 @@ public class WorkoutBuilderController {
         try {
             newExercise = storedExerciseService.saveStoredExercise(exercise);
         } catch (Exception e) {
-            //TODO LOG ERROR
+            LOGGER.error("Unable to create exercise with id: " + exercise.getId() + " | error: " + e.getMessage(), e);
         }
         return newExercise;
     }
