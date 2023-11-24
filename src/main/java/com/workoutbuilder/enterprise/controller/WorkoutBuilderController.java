@@ -263,6 +263,8 @@ public class WorkoutBuilderController {
             }
 
             return new ResponseEntity<>(loggedWorkout, HttpStatus.OK);
+        } catch (SpecificException e) {
+            return new ResponseEntity<>("Error message specific to the exception", HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
             return new ResponseEntity<>("An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
