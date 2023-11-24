@@ -7,7 +7,6 @@ import com.workoutbuilder.enterprise.dto.Workout;
 import com.workoutbuilder.enterprise.service.IExerciseService;
 import com.workoutbuilder.enterprise.service.IStoredExerciseService;
 import com.workoutbuilder.enterprise.service.IWorkoutService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
@@ -28,7 +27,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Controller class responsible for handling requests related to workouts and exercises.
+ * Controller class responsible for handling requests related to workouts and
+ * exercises.
  */
 @Controller
 public class WorkoutBuilderController {
@@ -57,6 +57,7 @@ public class WorkoutBuilderController {
 
     /**
      * Maps the '/calendar' URL to the calendar page
+     * 
      * @param model Model object for UI rendering.
      * @return calendar page
      * @throws IOException exception
@@ -69,8 +70,9 @@ public class WorkoutBuilderController {
 
     /**
      * Maps a workout with an ID to a page to view workout details
+     * 
      * @param model Model object for UI rendering
-     * @param id workout ID
+     * @param id    workout ID
      * @return single workout page
      * @throws IOException exception
      */
@@ -88,6 +90,7 @@ public class WorkoutBuilderController {
 
     /**
      * Maps an exercise with an ID to a page to view exercise details
+     * 
      * @param model Model object for UI rendering
      * @return single exercise page
      * @throws IOException exception
@@ -106,6 +109,7 @@ public class WorkoutBuilderController {
 
     /**
      * Maps the '/exercises' URL to the exercise library page
+     * 
      * @param model Model object for UI rendering
      * @return exercise library page
      * @throws IOException exercise
@@ -123,7 +127,7 @@ public class WorkoutBuilderController {
      */
     @GetMapping("api/exercise")
     @ResponseBody
-    public ResponseEntity<List<Exercise>> fetchAllExercises(){
+    public ResponseEntity<List<Exercise>> fetchAllExercises() {
         try {
             List<Exercise> exercises = exerciseService.findAll();
             HttpHeaders headers = new HttpHeaders();
@@ -137,14 +141,16 @@ public class WorkoutBuilderController {
 
     /**
      * Returns a list of exercises from api from a given name
+     * 
      * @param name search name for exercises to be found
      * @return a list of 10 exercises
      */
     @GetMapping("api/searchExerciseAutocomplete")
-    public ResponseEntity<List<Exercise>> searchExerciseAutocomplete(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
+    public ResponseEntity<List<Exercise>> searchExerciseAutocomplete(
+            @RequestParam(value = "name", required = true, defaultValue = "none") String name) {
         try {
             List<Exercise> exercises = exerciseService.findByName(name);
-            if(exercises == null) {
+            if (exercises == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
             HttpHeaders headers = new HttpHeaders();
@@ -158,23 +164,25 @@ public class WorkoutBuilderController {
 
     /**
      * Returns a single exercise from api from a given name
+     * 
      * @param name name of the exercise to be found
      * @return a single exercise
      */
     @GetMapping("api/searchExercise")
-    public ResponseEntity<Exercise> searchExercise(@RequestParam(value="name", required = true, defaultValue = "none") String name) {
+    public ResponseEntity<Exercise> searchExercise(
+            @RequestParam(value = "name", required = true, defaultValue = "none") String name) {
         try {
             Exercise exercise = exerciseService.findExercise(name);
-              
+
             if (exercise == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-          
+
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             return new ResponseEntity<>(exercise, headers, HttpStatus.OK);
         } catch (IOException e) {
-            e.printStackTrace();  // Log the exception or handle it appropriately
+            e.printStackTrace(); // Log the exception or handle it appropriately
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -187,14 +195,16 @@ public class WorkoutBuilderController {
      */
     @GetMapping("api/exercise/{id}")
     @ResponseBody
-    public Optional<StoredExercise> fetchExerciseById(@PathVariable("id") int id){
+    public Optional<StoredExercise> fetchExerciseById(@PathVariable("id") int id) {
         return storedExerciseService.findById(id);
     }
 
     /**
      * Gets workouts for a given date range.
      * For use with FullCalendar.
-     * @link <a href="https://fullcalendar.io/docs/events-json-feed">Fullcalendar JSON feed</a>
+     * 
+     * @link <a href="https://fullcalendar.io/docs/events-json-feed">Fullcalendar
+     *       JSON feed</a>
      * @return List of workout dates and IDs.
      */
     @GetMapping("api/workout")
@@ -272,7 +282,7 @@ public class WorkoutBuilderController {
         try {
             newExercise = storedExerciseService.saveStoredExercise(exercise);
         } catch (Exception e) {
-            //TODO LOG ERROR
+            // TODO LOG ERROR
         }
         return newExercise;
     }
@@ -281,11 +291,12 @@ public class WorkoutBuilderController {
      * Deletes an exercise by its ID.
      *
      * @param id ID of the exercise to be deleted.
-     * @return ResponseEntity with either HTTP OK status or HTTP Internal Server Error status.
+     * @return ResponseEntity with either HTTP OK status or HTTP Internal Server
+     *         Error status.
      */
     @DeleteMapping("api/exercise/{id}")
     public ResponseEntity<Exercise> deleteExercise(@PathVariable("id") int id) {
-        try{
+        try {
             storedExerciseService.deleteStoredExercise(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
