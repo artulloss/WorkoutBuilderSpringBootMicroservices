@@ -8,6 +8,7 @@ import com.workoutbuilder.enterprise.service.IExerciseService;
 import com.workoutbuilder.enterprise.service.IStoredExerciseService;
 import com.workoutbuilder.enterprise.service.IWorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,7 @@ import java.util.Optional;
  * exercises.
  */
 @Controller
+
 public class WorkoutBuilderController {
 
     @Autowired
@@ -247,25 +249,22 @@ public class WorkoutBuilderController {
     /**
      * Logs a new workout
      */
-    @PostMapping(value = "api/workout", consumes = "application/json", produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<Object> logWorkout(@RequestBody Workout workout) {
+    @PostMapping(value = "api/logWorkout", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> logWorkout(@RequestBody Workout workout) {
         try {
-            // Save workout first (without exercises)
-            workout = workoutService.saveWorkout(workout);
-
-            List<StoredExercise> savedExercises = new ArrayList<>();
-            for (StoredExercise exercise : workout.getExercises()) {
-                exercise.setWorkout(workout);
-                StoredExercise savedExercise = storedExerciseService.saveStoredExercise(exercise);
-                savedExercises.add(savedExercise);
+            if (workout == null) {
+                return new ResponseEntity<>("Invalid workout data", HttpStatus.BAD_REQUEST);
             }
 
-            // Add saved exercises to the workout and update it
-            workout.setExercises(savedExercises);
-            return new ResponseEntity<>(workoutService.saveWorkout(workout), HttpStatus.OK);
+            Workout loggedWorkout = workoutService.saveWorkout(workout);
+            if (loggedWorkout == null) {
+
+                return new ResponseEntity<>("Unable to log workout", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+            return new ResponseEntity<>(loggedWorkout, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -295,8 +294,13 @@ public class WorkoutBuilderController {
      *         Error status.
      */
     @DeleteMapping("api/exercise/{id}")
-    public ResponseEntity<Exercise> deleteExercise(@PathVariable("id") int id) {
+    public ResponseEntity<?> deleteExercise(@PathVariable("id") int id) {
         try {
+            Optional<StoredExercise> exercise = storedExerciseService.findById(id);
+            if (!exercise.isPresent()) {
+                return new ResponseEntity<>("Exercise not found", HttpStatus.NOT_FOUND);
+            }
+
             storedExerciseService.deleteStoredExercise(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
