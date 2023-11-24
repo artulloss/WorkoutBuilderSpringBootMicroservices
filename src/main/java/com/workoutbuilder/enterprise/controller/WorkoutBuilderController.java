@@ -263,8 +263,8 @@ public class WorkoutBuilderController {
             }
 
             return new ResponseEntity<>(loggedWorkout, HttpStatus.OK);
-        } catch (SpecificException e) {
-            return new ResponseEntity<>("Error message specific to the exception", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (WorkoutValidationException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>("An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -310,4 +310,10 @@ public class WorkoutBuilderController {
         }
     }
 
+    public class WorkoutValidationException extends RuntimeException {
+        public WorkoutValidationException(String message) {
+            super(message);
+        }
+        // Additional constructors or methods can be added as needed
+    }
 }
