@@ -2,6 +2,7 @@ package com.workoutbuilder.enterprise;
 
 import com.google.gson.Gson;
 import com.workoutbuilder.enterprise.dao.ExerciseDAO;
+import com.workoutbuilder.enterprise.dao.StoredExerciseDAO;
 import com.workoutbuilder.enterprise.dao.WorkoutDAO;
 import com.workoutbuilder.enterprise.dao.WorkoutRepository;
 import com.workoutbuilder.enterprise.dto.Exercise;
@@ -37,6 +38,7 @@ public class EnterpriseApplicationTests {
 	private ExerciseDAO exerciseRetrofitDAO;
 	private WorkoutDAO workoutDAO;
 	private WorkoutRepository workoutRepository;
+	private StoredExerciseDAO storedExerciseDAO;
 
 	@Autowired
 	private Gson gson;
@@ -90,7 +92,7 @@ public class EnterpriseApplicationTests {
 
 		when(workoutDAO.findById(anyLong())).thenReturn(mockWorkout);
 
-		List<StoredExercise> result = StoredExerciseService.findExercisesByWorkoutId(1L);
+		List<StoredExercise> result = storedExerciseDAO.findExercisesByWorkoutId(1L);
 
 		assertEquals(Arrays.asList(storedExercise1, storedExercise2), result);
 	}
@@ -99,7 +101,7 @@ public class EnterpriseApplicationTests {
 	void findExercisesByWorkoutIdWithNonexistentWorkout() {
 		when(workoutDAO.findById(anyLong())).thenReturn(null);
 
-		List<StoredExercise> result = StoredExerciseService.findExercisesByWorkoutId(2L);
+		List<StoredExercise> result = storedExerciseDAO.findExercisesByWorkoutId(2L);
 
 		assertEquals(null, result);
 	}
