@@ -100,7 +100,7 @@ public class StoredExerciseService implements IStoredExerciseService {
      * @param workoutId the ID of the workout
      * @return a list of exercises associated with the specified workout
      */
-    public List<StoredExercise> findExercisesByWorkoutId(long workoutId) {
+    public static List<StoredExercise> findExercisesByWorkoutId(long workoutId) {
         workoutId = workoutDAO.findById(workoutId).getId();
         return storedExerciseDAO.findExercisesByWorkoutId(workoutId);
     }
