@@ -7,7 +7,6 @@ import com.workoutbuilder.enterprise.dto.Workout;
 import com.workoutbuilder.enterprise.service.IExerciseService;
 import com.workoutbuilder.enterprise.service.IStoredExerciseService;
 import com.workoutbuilder.enterprise.service.IWorkoutService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;

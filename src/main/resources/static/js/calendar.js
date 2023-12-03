@@ -23,7 +23,7 @@ import { toast } from "./toast.js";
             color: '#A10A0A',
             textColor: 'white'
         },
-        timeZone: 'UTC',
+        timeZone: 'EST',
     });
     calendar.render();
 })();
