@@ -1,4 +1,6 @@
-# Spring Boot Microservices With IntelliJ IDEA - Workout Builder
+# Spring Boot Microservices With IntelliJ IDEA - Workout Logger
+
+See it deployed [here!](https://workout-logger-final-project.azurewebsites.net/)
 
 ## Introduction
 
